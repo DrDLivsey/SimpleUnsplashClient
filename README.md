@@ -1,4 +1,4 @@
-**SimpleUnsplashClient - is an iOS app-client for Unsplash webservice.**_
+**SimpleUnsplashClient - is an iOS app-client for Unsplash webservice.**
 
 **Features**:
 
