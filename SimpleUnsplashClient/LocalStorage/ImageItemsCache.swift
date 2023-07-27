@@ -8,15 +8,15 @@
 import Foundation
 
 protocol ImageItemsCacheProtocol {
-    func getImageItems (currentPage: Int) -> [ImageItemProtocol]?
-    func putImageItems (currentPage: Int, imageItems: [ImageItemProtocol]) -> ()
+    func getImageItems (currentPage: Int) -> [ImageItem]?
+    func putImageItems (currentPage: Int, imageItems: [ImageItem]) -> ()
 }
 
 class ImageItemsCache: ImageItemsCacheProtocol {
     
     private let cache = NSCache<NSString, ImageStorageWrapper>()
     
-    func getImageItems (currentPage: Int) -> [ImageItemProtocol]? {
+    func getImageItems (currentPage: Int) -> [ImageItem]? {
         
         let nsCurrentPage = NSString(string: String(currentPage))
         
@@ -28,20 +28,20 @@ class ImageItemsCache: ImageItemsCacheProtocol {
         }
     }
     
-    func putImageItems (currentPage: Int, imageItems: [ImageItemProtocol]) -> () {
+    func putImageItems (currentPage: Int, imageItems: [ImageItem]) -> () {
         
         let nsCurrentPage = NSString(string: String(currentPage))
         self.cache.setObject(ImageStorageWrapper(wrapper: imageItems), forKey: nsCurrentPage)
     }
     
     //класс-обертка, куда помещается коллекция экземпляров
-    //APIAnswer для корректной работы с NSCache(принимает только классы)
-    //APIAnswer - структура
+    //ImageAPIAnswer для корректной работы с NSCache(принимает только классы)
+    //ImageAPIAnswer - структура
     private class ImageStorageWrapper {
     
-        let wrapper: [ImageItemProtocol]
+        let wrapper: [ImageItem]
         
-        init(wrapper: [ImageItemProtocol]) {
+        init(wrapper: [ImageItem]) {
             self.wrapper = wrapper
         }
     }

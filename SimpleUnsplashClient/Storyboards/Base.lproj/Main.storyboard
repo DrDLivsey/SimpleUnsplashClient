@@ -29,7 +29,7 @@
         <!--Images List-->
         <scene sceneID="Jfg-kM-fhc">
             <objects>
-                <collectionViewController storyboardIdentifier="ImageCollectionVC" id="dAd-BP-KtW" customClass="ImageCollectionVC" customModule="SimpleUnsplashClient2" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="ImageCollectionVC" id="dAd-BP-KtW" customClass="ImageCollectionVC" customModule="SimpleUnsplashClient" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="eFQ-r6-75r">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +55,7 @@
         <!--Image DetailVC-->
         <scene sceneID="KNV-97-Ita">
             <objects>
-                <viewController storyboardIdentifier="ImageDetailVC" id="F21-vq-BvF" customClass="ImageDetailVC" customModule="SimpleUnsplashClient2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageDetailVC" id="F21-vq-BvF" customClass="ImageDetailVC" customModule="SimpleUnsplashClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CWb-cS-F0k">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

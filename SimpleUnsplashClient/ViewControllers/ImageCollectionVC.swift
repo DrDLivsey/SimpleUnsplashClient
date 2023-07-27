@@ -9,11 +9,11 @@ import UIKit
 
 class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
     
-    private var imagesCollection: [ImageItemProtocol] = []
+    private var imagesCollection: [ImageCollectionCellModel] = []
     private let presenter = ImagePresenter()
     private var currentPage = 1
     private var errorMessage = ""
-    private let spinner = SpinnerVC()
+    private let spinner = Spinner()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +22,6 @@ class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
         let cellTypeNib = UINib(nibName: "ImageCollectionCell", bundle: nil)
         collectionView.register(cellTypeNib, forCellWithReuseIdentifier: "ImageCollectionCell")
         
-        //показ заглушки при получении данных
-        //открепляем вью в presentImageItems
-        addChild(spinner)
-        spinner.view.frame = view.frame
-        view.addSubview(spinner.view)
         
         presenter.setViewDelegate(delegate: self)
         
@@ -63,7 +58,7 @@ class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
         self.dismiss(animated: false)
     }
     
-    internal func presentImageItems(imageItems: [ImageItemProtocol]) -> () {
+    internal func presentImageItems(imageItems: [ImageItem]) -> () {
         self.imagesCollection.append(contentsOf: imageItems)
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -93,17 +88,17 @@ class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
         }
     }
     
-    //настройка ячейки
-    private func cellConfigure (cell: inout ImageCollectionCell, for indexPath: IndexPath) {
-        let imageItem = imagesCollection[indexPath.row]
-        let textUIColor = UIColor(hex: imageItem.color)
-        let attributedLinkString = NSAttributedString(string: "\(imageItem.description)",
-                                                      attributes: [NSAttributedString.Key.foregroundColor : textUIColor])
-        
-        cell.imageDescription?.attributedText = attributedLinkString
-        cell.imageThumb?.image = imageItem.imageThumb
-        cell.imageLikes?.text = "\u{1F44D}: \(imageItem.likes)"
-    }
+//    //настройка ячейки
+//    private func cellConfigure (cell: inout ImageCollectionCell, for indexPath: IndexPath) {
+//        let imageItem = imagesCollection[indexPath.row]
+//        let textUIColor = UIColor(hex: imageItem.color)
+//        let attributedLinkString = NSAttributedString(string: "\(imageItem.description)",
+//                                                      attributes: [NSAttributedString.Key.foregroundColor : textUIColor])
+//        
+//        cell.imageDescription?.attributedText = attributedLinkString
+//        cell.imageThumb?.image = imageItem.imageThumb
+//        cell.imageLikes?.text = "\u{1F44D}: \(imageItem.likes)"
+//    }
     
     //настройка отображения UICollection
     private func setupCollectionView() {

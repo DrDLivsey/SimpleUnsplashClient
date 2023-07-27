@@ -7,16 +7,7 @@
 
 import UIKit
 
-protocol ImageItemProtocol {
-    var description: String { get }
-    var color: String { get }
-    var likes: Int { get }
-    var imageThumb: UIImage { get }
-    var imageRegular: UIImage { get }
-    var user: String { get }
-}
-
-struct ImageItem: ImageItemProtocol {
+struct ImageItem {
     var description: String
     var color: String
     var likes: Int
