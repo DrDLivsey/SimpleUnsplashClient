@@ -7,65 +7,50 @@
 
 import UIKit
 
-protocol ImagePresenterDelegate: AnyObject {
-    func presentImageItems(imageItems: [ImageItem]) -> ()
-    func presentErrorMessage(errorMessage: String) -> ()
+protocol ImageManagerProtocol {
+    func prepareImageItems(currentPage: Int) -> ()
 }
 
-typealias PresenterDelegate = ImagePresenterDelegate & UIViewController
-
-protocol ImagePresenterProtocol {
+final class ImageManager: ImageManagerProtocol {
     
-}
-
-class ImagePresenter: NetworkManagerDelegate {
-    
-    weak var delegate: PresenterDelegate?
-    private let manager = NetworkManager()
-    
-    func setViewDelegate(delegate: PresenterDelegate) {
-        self.delegate = delegate
-    }
+    private var imagesForDisplay: [ImageDisplayModel] = []
     
     func prepareImageItems(currentPage: Int) -> () {
         
-        let cache = ImageItemsCache()
+        let networkManager: NetworkManagerProtocol
+        let cacheManager: CacheManagerProtocol
         
         //проверяем есть ли кэшированные данные
         //если есть разворачиваем данные из кэша передаем в замыкание
-        if let cachedData = cache.getImageItems(currentPage: currentPage){
-            self.delegate?.presentImageItems(imageItems: cachedData)
+        if let cachedData = cacheManager.getImageItems(currentPage: currentPage){
+            imagesForDisplay.append(contentsOf: cachedData)
             
-            //если кэша нет, то дергаем ручку
-            //и разбираем ответ
+        //если кэша нет, то дергаем ручку
+        //и разбираем ответ
         } else {
-            var imageItems:[ImageItem] = []
-            let manager = NetworkManager()
-            let urlWithPage = "https://api.unsplash.com/photos/?client_id=xscBeO9EtLaijog5ZG3GyY_jj8ee4cU_DfMCIDPsgnQ&page=" + String(currentPage)
-            
-            manager.setViewDelegate(delegate: self)
-            manager.getData(currentPage: currentPage, urlWithPage: urlWithPage) { result in
+            var imageItems:[ImageDisplayModel] = []
+            networkManager.getImagesFromAPI(currentPage: currentPage) { result in
                 switch result {
                 case .success(let answer):
                     for i in answer {
-                        let imageItem = ImageItem(description: i.description ?? i.alt_description ?? "No description",
-                                                  color: i.color ?? "No color",
-                                                  likes: i.likes ?? 0,
-                                                  imageThumb: self.loadImageFile(urlToImage: i.urls?.thumb),
-                                                  imageRegular: self.loadImageFile(urlToImage: i.urls?.regular),
-                                                  user: i.user?.username ?? "No username")
+                        let imageItem = ImageDisplayModel(description: i.description ?? i.alt_description ?? "No description",
+                                                          color: i.color ?? "No color",
+                                                          likes: i.likes ?? 0,
+                                                          imageThumb: i.urls?.thumb,
+                                                          imageRegular: i.urls?.regular,
+                                                          user: i.user?.username ?? "No username")
                         imageItems.append(imageItem)
                     }
                     //сохраняем в кэш с ключом = номер страницы
-                    cache.putImageItems(currentPage: currentPage, imageItems: imageItems)
-                    self.delegate?.presentImageItems(imageItems: imageItems)
-        
+                    cacheManager.putImageItems(currentPage: currentPage, imageItems: imageItems)
+                    
                 case .failure(let error):
                     print(error)
                 }
             }
         }
     }
+}
     
 
     
@@ -102,4 +87,4 @@ class ImagePresenter: NetworkManagerDelegate {
 //    private func returnImagePlaceHolder () -> UIImage {
 //        return UIImage(named: "noImagePlaceholder")!
 //    }
-}
+

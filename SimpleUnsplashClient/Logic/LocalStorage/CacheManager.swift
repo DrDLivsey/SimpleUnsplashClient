@@ -7,19 +7,17 @@
 
 import Foundation
 
-protocol ImageItemsCacheProtocol {
-    func getImageItems (currentPage: Int) -> [ImageItem]?
-    func putImageItems (currentPage: Int, imageItems: [ImageItem]) -> ()
+protocol CacheManagerProtocol {
+    func getImageItems (currentPage: Int) -> [ImageDisplayModel]?
+    func putImageItems (currentPage: Int, imageItems: [ImageDisplayModel]) -> ()
 }
 
-class ImageItemsCache: ImageItemsCacheProtocol {
+final class CacheManager: CacheManagerProtocol {
     
     private let cache = NSCache<NSString, ImageStorageWrapper>()
     
-    func getImageItems (currentPage: Int) -> [ImageItem]? {
-        
+    func getImageItems (currentPage: Int) -> [ImageDisplayModel]? {
         let nsCurrentPage = NSString(string: String(currentPage))
-        
         if let cachedData = cache.object(forKey: nsCurrentPage) {
             let imageItems = cachedData.wrapper
             return imageItems
@@ -28,20 +26,19 @@ class ImageItemsCache: ImageItemsCacheProtocol {
         }
     }
     
-    func putImageItems (currentPage: Int, imageItems: [ImageItem]) -> () {
-        
+    func putImageItems (currentPage: Int, imageItems: [ImageDisplayModel]) -> () {
         let nsCurrentPage = NSString(string: String(currentPage))
         self.cache.setObject(ImageStorageWrapper(wrapper: imageItems), forKey: nsCurrentPage)
     }
     
     //класс-обертка, куда помещается коллекция экземпляров
-    //ImageAPIAnswer для корректной работы с NSCache(принимает только классы)
-    //ImageAPIAnswer - структура
+    //ImageAPIModel для корректной работы с NSCache(принимает только классы)
+    //ImageAPIModel - структура
     private class ImageStorageWrapper {
-    
-        let wrapper: [ImageItem]
         
-        init(wrapper: [ImageItem]) {
+        let wrapper: [ImageDisplayModel]
+        
+        init(wrapper: [ImageDisplayModel]) {
             self.wrapper = wrapper
         }
     }

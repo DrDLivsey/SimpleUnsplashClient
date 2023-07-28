@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ImageAPIAnswer: Decodable {
+struct ImageAPIModel: Decodable {
     let color: String?
     let description: String?
     let alt_description: String?

@@ -7,12 +7,12 @@
 
 import UIKit
 
-struct ImageItem {
+struct ImageDisplayModel {
     var description: String
     var color: String
     var likes: Int
-    var imageThumb: UIImage
-    var imageRegular: UIImage
+    var imageThumb: URL?
+    var imageRegular: URL?
     var user: String
 }
 
