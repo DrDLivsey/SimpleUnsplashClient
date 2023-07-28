@@ -11,8 +11,8 @@ struct ImageDisplayModel {
     var description: String
     var color: String
     var likes: Int
-    var imageThumb: URL?
-    var imageRegular: URL?
+    var imageThumb: String
+    var imageRegular: String
     var user: String
 }
 

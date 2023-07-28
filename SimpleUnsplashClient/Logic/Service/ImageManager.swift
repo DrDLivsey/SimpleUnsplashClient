@@ -13,34 +13,27 @@ protocol ImageManagerProtocol {
 
 final class ImageManager: ImageManagerProtocol {
     
+    //итоговое хранилище всех моделей для отображения
     private var imagesForDisplay: [ImageDisplayModel] = []
     
-    func prepareImageItems(currentPage: Int) -> () {
+    internal func prepareImageItems(currentPage: Int) -> () {
         
-        let networkManager: NetworkManagerProtocol
-        let cacheManager: CacheManagerProtocol
+        let networkManager: NetworkManagerProtocol = NetworkManager()
+        let cacheManager: CacheManagerProtocol = CacheManager()
         
         //проверяем есть ли кэшированные данные
-        //если есть разворачиваем данные из кэша передаем в замыкание
+        //если есть, разворачиваем данные из кэша добавляем к общему хранилищу
         if let cachedData = cacheManager.getImageItems(currentPage: currentPage){
             imagesForDisplay.append(contentsOf: cachedData)
-            
         //если кэша нет, то дергаем ручку
         //и разбираем ответ
         } else {
-            var imageItems:[ImageDisplayModel] = []
             networkManager.getImagesFromAPI(currentPage: currentPage) { result in
                 switch result {
                 case .success(let answer):
-                    for i in answer {
-                        let imageItem = ImageDisplayModel(description: i.description ?? i.alt_description ?? "No description",
-                                                          color: i.color ?? "No color",
-                                                          likes: i.likes ?? 0,
-                                                          imageThumb: i.urls?.thumb,
-                                                          imageRegular: i.urls?.regular,
-                                                          user: i.user?.username ?? "No username")
-                        imageItems.append(imageItem)
-                    }
+                    var imageItems = self.trasferAPIToDispModel(input: answer)
+                    //добавляем полученные модели в общее хранилище
+                    self.imagesForDisplay.append(contentsOf: imageItems)
                     //сохраняем в кэш с ключом = номер страницы
                     cacheManager.putImageItems(currentPage: currentPage, imageItems: imageItems)
                     
@@ -49,6 +42,24 @@ final class ImageManager: ImageManagerProtocol {
                 }
             }
         }
+    }
+}
+
+
+extension ImageManager {
+    func trasferAPIToDispModel(input: [ImageAPIModel]) -> [ImageDisplayModel] {
+        var imageItems: [ImageDisplayModel] = []
+        for i in input {
+            let imageItem = ImageDisplayModel(description: i.description ?? i.alt_description ?? "No description",
+                                              color: i.color ?? "No color",
+                                              likes: i.likes ?? 0,
+                                              imageThumb: i.urls?.thumb ?? "No URL",
+                                              imageRegular: i.urls?.regular ?? "No URL",
+                                              user: i.user?.username ?? "No username")
+            imageItems.append(imageItem)
+        }
+        
+        return imageItems
     }
 }
     

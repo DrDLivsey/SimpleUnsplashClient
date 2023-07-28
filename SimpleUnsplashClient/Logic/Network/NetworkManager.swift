@@ -35,7 +35,8 @@ final class NetworkManager: NetworkManagerProtocol {
         components.queryItems = [
             URLQueryItem(name: Constants.clientID,
                          value: Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String),
-            URLQueryItem(name: Constants.page, value: String(page))
+            URLQueryItem(name: Constants.page,
+                         value: String(page))
         ]
         if let url = components.url {
             return url

@@ -12,7 +12,7 @@ class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
     private var imagesCollection: [ImageCollectionCellModel] = []
     private let presenter = ImagePresenter()
     private var currentPage = 1
-    private var errorMessage = ""
+    
     private let spinner = Spinner()
     
     override func viewDidLoad() {
