@@ -14,6 +14,7 @@ struct ImageCollectionCellModel {
     let imageFile: UIImage
     let imageDescription: NSAttributedString
     let imageLikes: String
+    let imageDescColor: String
 }
 
 //класс для отображения

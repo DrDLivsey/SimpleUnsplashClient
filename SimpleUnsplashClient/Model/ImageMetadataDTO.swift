@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct ImageAPIModel: Decodable {
+struct ImageMetadataDTO: Decodable {
     let color: String?
     let description: String?
     let alt_description: String?
-    let urls: ImageUrls?
+    let urls: ImageUrlsDTO?
     let likes: Int?
-    let user: ImageUser?
+    let user: ImageUserDTO?
 }
 
-struct ImageUrls: Decodable {
+struct ImageUrlsDTO: Decodable {
     let thumb: String?
     let regular: String?
 }
 
-struct ImageUser: Decodable {
+struct ImageUserDTO: Decodable {
     let username: String?
 }

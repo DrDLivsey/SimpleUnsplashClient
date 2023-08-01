@@ -7,16 +7,16 @@
 
 import Foundation
 
-protocol CacheManagerProtocol {
-    func getImageItems (currentPage: Int) -> [ImageDisplayModel]?
-    func putImageItems (currentPage: Int, imageItems: [ImageDisplayModel]) -> ()
+protocol ImageListLocalDataSourceProtocol {
+    func getImageItems (currentPage: Int) -> [ImageMetadata]?
+    func setImageItems (currentPage: Int, imageItems: [ImageMetadata])
 }
 
-final class CacheManager: CacheManagerProtocol {
+final class ImageListLocalDataSource: ImageListLocalDataSourceProtocol {
     
     private let cache = NSCache<NSString, ImageStorageWrapper>()
     
-    func getImageItems (currentPage: Int) -> [ImageDisplayModel]? {
+    func getImageItems (currentPage: Int) -> [ImageMetadata]? {
         let nsCurrentPage = NSString(string: String(currentPage))
         if let cachedData = cache.object(forKey: nsCurrentPage) {
             let imageItems = cachedData.wrapper
@@ -26,19 +26,19 @@ final class CacheManager: CacheManagerProtocol {
         }
     }
     
-    func putImageItems (currentPage: Int, imageItems: [ImageDisplayModel]) -> () {
+    func setImageItems (currentPage: Int, imageItems: [ImageMetadata]) {
         let nsCurrentPage = NSString(string: String(currentPage))
         self.cache.setObject(ImageStorageWrapper(wrapper: imageItems), forKey: nsCurrentPage)
     }
     
     //класс-обертка, куда помещается коллекция экземпляров
-    //ImageAPIModel для корректной работы с NSCache(принимает только классы)
-    //ImageAPIModel - структура
+    //ImageMetadata для корректной работы с NSCache(принимает только классы)
+    //ImageMetadata - структура
     private class ImageStorageWrapper {
         
-        let wrapper: [ImageDisplayModel]
+        let wrapper: [ImageMetadata]
         
-        init(wrapper: [ImageDisplayModel]) {
+        init(wrapper: [ImageMetadata]) {
             self.wrapper = wrapper
         }
     }

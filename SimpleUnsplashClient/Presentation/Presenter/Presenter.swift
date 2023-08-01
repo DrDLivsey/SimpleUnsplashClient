@@ -6,6 +6,22 @@
 //
 
 import Foundation
-import Kingfisher
 
 
+
+protocol ImagePresenerProtocol {
+    func giveImageCells(input: [ImageMetadata]) -> [ImageCollectionCellModel]
+    //заполнить func giveImageDetail ()
+}
+
+
+final class ImagePresenter {
+    
+    private var cellsForImageCollectionVC: [ImageCollectionCellModel] = []
+    private let imageListRepository: ImageListRepositoryProtocol = ImageListRepository()
+    
+    
+
+    
+    
+}

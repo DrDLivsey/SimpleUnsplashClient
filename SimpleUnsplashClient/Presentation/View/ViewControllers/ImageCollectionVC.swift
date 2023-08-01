@@ -10,7 +10,6 @@ import UIKit
 class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
     
     private var imagesCollection: [ImageCollectionCellModel] = []
-    private let presenter = ImagePresenter()
     private var currentPage = 1
     
     private let spinner = Spinner()
@@ -27,7 +26,7 @@ class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
         
         let dispatchQueue = DispatchQueue.global()
         dispatchQueue.async {
-            self.presenter.prepareImageItems(currentPage: self.currentPage)
+            self.presenter.getImageItems(currentPage: self.currentPage)
         }
     }
     
@@ -58,7 +57,7 @@ class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
         self.dismiss(animated: false)
     }
     
-    internal func presentImageItems(imageItems: [ImageItem]) -> () {
+    internal func presentImageItems(imageItems: [ImageItem]) {
         self.imagesCollection.append(contentsOf: imageItems)
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -67,7 +66,7 @@ class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
         }
     }
     
-    internal func presentErrorMessage(errorMessage: String) -> () {
+    internal func presentErrorMessage(errorMessage: String) {
         self.errorMessage = errorMessage
         if errorMessage != "" {
             DispatchQueue.main.async {
@@ -84,7 +83,7 @@ class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
         currentPage += 1
         let dispatchQueue = DispatchQueue.global()
         dispatchQueue.async {
-            self.presenter.prepareImageItems(currentPage: self.currentPage)
+            self.presenter.getImageItems(currentPage: self.currentPage)
         }
     }
     
@@ -94,7 +93,7 @@ class ImageCollectionVC: UICollectionViewController, ImagePresenterDelegate {
 //        let textUIColor = UIColor(hex: imageItem.color)
 //        let attributedLinkString = NSAttributedString(string: "\(imageItem.description)",
 //                                                      attributes: [NSAttributedString.Key.foregroundColor : textUIColor])
-//        
+//
 //        cell.imageDescription?.attributedText = attributedLinkString
 //        cell.imageThumb?.image = imageItem.imageThumb
 //        cell.imageLikes?.text = "\u{1F44D}: \(imageItem.likes)"
