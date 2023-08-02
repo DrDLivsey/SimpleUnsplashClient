@@ -14,7 +14,7 @@ protocol ImageListRepositoryProtocol {
 final class ImageListRepository: ImageListRepositoryProtocol {
     
     //итоговое хранилище всех моделей для отображения
-    var imagesForDisplay: [ImageMetadata] = []
+    var imagesInternalModel: [ImageMetadata] = []
     
     internal func getImageItems(currentPage: Int) {
         
@@ -25,7 +25,7 @@ final class ImageListRepository: ImageListRepositoryProtocol {
         //проверяем есть ли кэшированные данные
         //если есть, разворачиваем данные из кэша добавляем к общему хранилищу
         if let cachedData = imageListLocalDataSource.getImageItems(currentPage: currentPage){
-            imagesForDisplay.append(contentsOf: cachedData)
+            imagesInternalModel.append(contentsOf: cachedData)
         //если кэша нет, то дергаем ручку
         //и разбираем ответ
         } else {
@@ -35,9 +35,9 @@ final class ImageListRepository: ImageListRepositoryProtocol {
                     //проверяем, что удалось создать DTO модели из JSON
                     if let imageItemsDTO = imageListRemoteDataSource.convertJSONToDTO(imageDataFromAPI: answer) {
                         //если удалось, то перегоняем DTO в Internal модели
-                        var imageItemsInternal = self.trasferAPIToDispModel(input: imageItemsDTO)
+                        let imageItemsInternal = self.trasferAPIToDispModel(input: imageItemsDTO)
                         //добавляем полученные Internal модели в общее хранилище
-                        self.imagesForDisplay.append(contentsOf: imageItemsInternal)
+                        self.imagesInternalModel.append(contentsOf: imageItemsInternal)
                         //сохраняем в кэш с ключом = номер страницы
                         imageListLocalDataSource.setImageItems(currentPage: currentPage, imageItems: imageItemsInternal)
                     } else {

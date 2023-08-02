@@ -11,10 +11,9 @@ import UIKit
 
 //структура дата полей
 struct ImageCollectionCellModel {
-    let imageFile: UIImage
+    let imageFile: UIImageView
     let imageDescription: NSAttributedString
     let imageLikes: String
-    let imageDescColor: String
 }
 
 //класс для отображения
@@ -26,7 +25,7 @@ final class ImageCollectionCell: UICollectionViewCell {
     
     //метод конфигурирования ячейки для списка
     private func configure(model: ImageCollectionCellModel) {
-        imageThumb?.image = model.imageFile
+        imageThumb = model.imageFile
         imageDescription?.attributedText = model.imageDescription
         imageLikes?.text = model.imageLikes
     }
