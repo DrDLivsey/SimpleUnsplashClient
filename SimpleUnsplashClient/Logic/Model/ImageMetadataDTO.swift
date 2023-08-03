@@ -17,8 +17,8 @@ struct ImageMetadataDTO: Decodable {
 }
 
 struct ImageUrlsDTO: Decodable {
-    let thumb: String?
-    let regular: String?
+    let thumb: URL?
+    let regular: URL?
 }
 
 struct ImageUserDTO: Decodable {

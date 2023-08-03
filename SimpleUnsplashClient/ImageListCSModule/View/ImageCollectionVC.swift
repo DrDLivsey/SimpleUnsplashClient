@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol ViewInput: AnyObject {
+protocol ImageCollectionVCInput: AnyObject {
     func display(imagesForDisplay:[ImageCollectionCellModel])
 }
 
 final class ImageCollectionVC: UICollectionViewController {
     
-    private var intercator: InteractorInput?
+    private var intercator: ImageCollectionInteractorInput?
     private var dataToDisplay: [ImageCollectionCellModel] = [] 
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -44,6 +44,6 @@ final class ImageCollectionVC: UICollectionViewController {
     
 }
 
-extension ImageCollectionVC: ViewInput {
+extension ImageCollectionVC: ImageCollectionVCInput {
     func display(imagesForDisplay:[ImageCollectionCellModel]){}
 }

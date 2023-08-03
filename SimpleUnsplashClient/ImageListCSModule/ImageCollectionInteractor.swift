@@ -7,24 +7,40 @@
 
 import Foundation
 
-protocol InteractorInput {
+//исправить название, сделать более точным
+protocol ImageCollectionInteractorInput {
     func fetchImages()
 }
 
 final class ImageCollectionInteractor {
     
-    var presenter: PresenterInput?
+    //сначала все публичное
+    //потом все приватное
+    
+    //типы
+    //проперти
+    //иниты
+    //методы
+    
+    private let presenter: ImageCollectionPresenterInput?
     //добавить сильную ссылку на роутер var router: RouterInput?
     
-    var imageCollection: [ImageMetadata] = []
     
+    //надо делать опциональным, а не пустым! переделано
+    private var imageCollection: [ImageMetadata]?
+    
+    private let imageListRepository = ImageListRepository()
+    
+    //добавить init
+   
    
 }
 
-extension ImageCollectionInteractor: InteractorInput {
+//fetch дб приватным
+//снаружи должны приходить факты а не указания
+
+extension ImageCollectionInteractor: ImageCollectionInteractorInput {
     func fetchImages() {
-        let imageListRepository = ImageListRepository()
-        
         //исправить входной параметр для функции
         imageListRepository.getImageItems(currentPage: 1)
         

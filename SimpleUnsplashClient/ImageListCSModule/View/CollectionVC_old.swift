@@ -7,7 +7,7 @@
 //
 //import UIKit
 //
-//protocol ViewInput: AnyObject {
+//protocol ImageCollectionVCInput: AnyObject {
 //    func displayData()
 //}
 //

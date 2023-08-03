@@ -23,7 +23,7 @@ final class APIClient: APIClientProtocol {
     func getImages(currentPage: Int, completion: @escaping (Result<Data, Error>) -> ()) {
         
         guard let url = createURL(page: currentPage) else {
-            completion(.failure(Error.wrongURL("Couldn't create URL for request data")))
+            completion(.failure(Error.wrongURL("Couldn't create URL with requested data")))
             return
         }
         

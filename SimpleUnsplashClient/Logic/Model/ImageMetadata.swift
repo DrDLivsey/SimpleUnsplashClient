@@ -11,8 +11,8 @@ struct ImageMetadata {
     let description: String
     let color: String
     let likes: Int
-    let imageThumb: String
-    let imageRegular: String
+    let imageThumb: URL?
+    let imageRegular: URL?
     let user: String
 }
 
