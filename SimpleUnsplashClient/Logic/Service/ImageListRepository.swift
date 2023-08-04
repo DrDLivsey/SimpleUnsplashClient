@@ -23,8 +23,6 @@ final class ImageListRepository: ImageListRepositoryProtocol {
     //итоговое хранилище всех моделей для отображения
     var imagesInternalModel: [ImageMetadata] = []
     
-    private var 
-    
     private let imageListRemoteDataSource: ImageListRemoteDataSourceProtocol = ImageListRemoteDataSource()
     private let imageListLocalDataSource: ImageListLocalDataSourceProtocol = ImageListLocalDataSource()
     
@@ -36,7 +34,7 @@ final class ImageListRepository: ImageListRepositoryProtocol {
             //если кэша нет, то дергаем ручку
             //и разбираем ответ
         } else {
-            imageListRemoteDataSource.getDTOModels(path: path, currentPage: currentPage) { result in
+            imageListRemoteDataSource.getDTOModels(currentPage: currentPage) { result in
                 switch result {
                 case .success(let resultedDTOModels):
                     guard let chechedResultedDTOModels = resultedDTOModels else {

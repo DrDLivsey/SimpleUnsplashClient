@@ -4,19 +4,21 @@
 //
 //  Created by Sergey Nikiforov on 31.07.2023.
 //
+//класс реализует доступ к API unsplash по любой ручке
+//параметры, которой мы передадим
 
 import Foundation
 
 protocol APIClientProtocol {
-    func requestData(path: String, currentPage: Int, completion: @escaping (Result<Data, Error>) -> ())
+    func requestData(path: String, parameters: [String:String], completion: @escaping (Result<Data, APIClient.APIClientError>) -> ())
 }
 
 
 final class APIClient: APIClientProtocol {
     
-    private enum APIClientError: Error {
+    enum APIClientError: Error {
         case wrongURL(String)
-        case requestError(Error?)
+        case requestError(String)
     }
     
     private enum Constants {
@@ -26,12 +28,13 @@ final class APIClient: APIClientProtocol {
     
     private let enviromentProvider: EnvironmentProviderProtocol = EnvironmentProvider()
     
-    func requestData(path: String, currentPage: Int, completion: @escaping (Result<Data, Error>) -> ()) {
+    func requestData(path: String, parameters: [String:String], completion: @escaping (Result<Data, APIClient.APIClientError>) -> ()) {
         
-        var parameters = ["page": String(currentPage)]
-        parameters["client_id"] = enviromentProvider.extractWith(key: "API_KEY")
+        var parameters = parameters
+        parameters["client_id"] = enviromentProvider.getAPIKeyValue()
         
         guard let url = createURL(path: path, parameters: parameters) else {
+            print("URL created for URLSession is broken")
             completion(.failure(APIClientError.wrongURL("Couldn't create URL with requested data")))
             return
         }
@@ -39,7 +42,8 @@ final class APIClient: APIClientProtocol {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
             guard data != nil else {
-                completion(.failure(APIClientError.requestError(error)))
+                print("No data after URLSession has worked")
+                completion(.failure(APIClientError.requestError("No data from server")))
                 return
             }
             
