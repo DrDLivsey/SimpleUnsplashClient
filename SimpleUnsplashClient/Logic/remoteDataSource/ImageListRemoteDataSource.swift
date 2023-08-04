@@ -8,12 +8,30 @@
 import Foundation
 
 protocol ImageListRemoteDataSourceProtocol {
-    func convertJSONToDTO (imageDataFromAPI: Data) -> [ImageMetadataDTO]?
+    func getDTOModels (path: String, currentPage: Int, completion: @escaping (Result<[ImageMetadataDTO]?, Error>) -> ())
 }
 
 final class ImageListRemoteDataSource: ImageListRemoteDataSourceProtocol {
     
-    func convertJSONToDTO (imageDataFromAPI: Data) -> [ImageMetadataDTO]? {
+    private let apiClient: APIClientProtocol = APIClient()
+    
+    func getDTOModels (path: String, currentPage: Int, completion: @escaping (Result<[ImageMetadataDTO]?, Error>) -> ()) {
+        
+        apiClient.requestData(path: path, currentPage: currentPage) { result in
+            switch result {
+            case .success(let response):
+                let resultedDTOModels = self.convertJSONToDTO(imageDataFromAPI: response)
+                completion(.success(resultedDTOModels))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+}
+
+extension ImageListRemoteDataSource {
+    private func convertJSONToDTO (imageDataFromAPI: Data) -> [ImageMetadataDTO]? {
         do {
             let result = try JSONDecoder().decode([ImageMetadataDTO].self, from: imageDataFromAPI)
             return result

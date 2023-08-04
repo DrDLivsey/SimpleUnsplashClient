@@ -9,20 +9,26 @@ import UIKit
 
 protocol ImageListRepositoryProtocol {
     var imagesInternalModel: [ImageMetadata] {get}
-    func getImageItems(currentPage: Int)
+    func getImageItems(path: String, currentPage: Int, completion: @escaping (Result<[ImageMetadata]?, Error>) ->())
 }
 
 final class ImageListRepository: ImageListRepositoryProtocol {
     
+    private enum ImageListRepositoryError: Error {
+        case serverError
+        case parsingError
+        case networkError
+    }
+    
     //итоговое хранилище всех моделей для отображения
     var imagesInternalModel: [ImageMetadata] = []
     
+    private var 
+    
     private let imageListRemoteDataSource: ImageListRemoteDataSourceProtocol = ImageListRemoteDataSource()
-    private let apiClient: APIClientProtocol = APIClient()
     private let imageListLocalDataSource: ImageListLocalDataSourceProtocol = ImageListLocalDataSource()
     
-    func getImageItems(currentPage: Int) {
-        
+    func getImageItems(path: String, currentPage: Int, completion: @escaping (Result<[ImageMetadata]?, Error>) ->()) {
         //проверяем есть ли кэшированные данные
         //если есть, разворачиваем данные из кэша добавляем к общему хранилищу
         if let cachedData = imageListLocalDataSource.getImageItems(currentPage: currentPage){
@@ -30,22 +36,16 @@ final class ImageListRepository: ImageListRepositoryProtocol {
             //если кэша нет, то дергаем ручку
             //и разбираем ответ
         } else {
-            apiClient.getImages(currentPage: currentPage) { result in
+            imageListRemoteDataSource.getDTOModels(path: path, currentPage: currentPage) { result in
                 switch result {
-                case .success(let response):
-                    //проверяем, что удалось создать DTO модели из JSON
-                    if let imageItemsDTO = self.imageListRemoteDataSource.convertJSONToDTO(imageDataFromAPI: response) {
-                        //если удалось, то перегоняем DTO в Internal модели
-                        let imageItemsInternal = self.trasferAPIToInternalModel(input: imageItemsDTO)
-                        //добавляем полученные Internal модели в общее хранилище
-                        self.imagesInternalModel.append(contentsOf: imageItemsInternal)
-                        //сохраняем в кэш с ключом = номер страницы
-                        self.imageListLocalDataSource.setImageItems(currentPage: currentPage, imageItems: imageItemsInternal)
-                    } else {
-                        print("Не удалось создать Internal-модели")
+                case .success(let resultedDTOModels):
+                    guard let chechedResultedDTOModels = resultedDTOModels else {
+                        return
                     }
-                case .failure(let error):
-                    print(error)
+                    let internalModelPack = self.trasferDTOToInternalModel(input: chechedResultedDTOModels)
+                    self.imagesInternalModel.append(contentsOf: internalModelPack)
+                case .failure(_):
+                    return
                 }
             }
         }
@@ -54,7 +54,7 @@ final class ImageListRepository: ImageListRepositoryProtocol {
 
 
 extension ImageListRepository {
-    private func trasferAPIToInternalModel(input: [ImageMetadataDTO]) -> [ImageMetadata] {
+    func trasferDTOToInternalModel(input: [ImageMetadataDTO]) -> [ImageMetadata] {
         
         return input.map { item in
             ImageMetadata(

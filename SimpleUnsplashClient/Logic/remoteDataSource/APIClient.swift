@@ -8,34 +8,38 @@
 import Foundation
 
 protocol APIClientProtocol {
-    func getImages(currentPage: Int, completion: @escaping (Result<Data, APIClient.Error>) -> ())
+    func requestData(path: String, currentPage: Int, completion: @escaping (Result<Data, Error>) -> ())
 }
 
 
 final class APIClient: APIClientProtocol {
     
-    indirect enum Error: Swift.Error {
+    private enum APIClientError: Error {
         case wrongURL(String)
-        case wrongResponse(URLResponse?)
-        case brokenJSON(URLResponse, Error)
+        case requestError(Error?)
     }
     
-    func getImages(currentPage: Int, completion: @escaping (Result<Data, Error>) -> ()) {
+    private enum Constants {
+        static let scheme = "https"
+        static let domain = "api.unsplash.com"
+    }
+    
+    private let enviromentProvider: EnvironmentProviderProtocol = EnvironmentProvider()
+    
+    func requestData(path: String, currentPage: Int, completion: @escaping (Result<Data, Error>) -> ()) {
         
-        guard let url = createURL(page: currentPage) else {
-            completion(.failure(Error.wrongURL("Couldn't create URL with requested data")))
+        var parameters = ["page": String(currentPage)]
+        parameters["client_id"] = enviromentProvider.extractWith(key: "API_KEY")
+        
+        guard let url = createURL(path: path, parameters: parameters) else {
+            completion(.failure(APIClientError.wrongURL("Couldn't create URL with requested data")))
             return
         }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
-            guard let response = response as? HTTPURLResponse else {
-                completion(.failure(Error.wrongResponse(response)))
-                return
-            }
-            
             guard data != nil else {
-                completion(.failure(Error.brokenJSON(response, error as! APIClient.Error)))
+                completion(.failure(APIClientError.requestError(error)))
                 return
             }
             
@@ -45,32 +49,18 @@ final class APIClient: APIClientProtocol {
     }
 }
 
+
+
 extension APIClient {
     
-    private enum Constants {
-        static let scheme = "https"
-        static let domain = "api.unsplash.com"
-        static let endpoint = "/photos/"
-        static let clientID = "client_id"
-        static let page = "page"
-    }
-    
-    private func createURL(page: Int) -> URL? {
+    private func createURL(path: String, parameters: [String:String]) -> URL? {
         var components = URLComponents()
         components.scheme = Constants.scheme
         components.host = Constants.domain
-        components.path = Constants.endpoint
-        components.queryItems = [
-            URLQueryItem(name: Constants.clientID,
-                         value: Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String),
-            URLQueryItem(name: Constants.page,
-                         value: String(page))
-        ]
-        if let url = components.url {
-            return url
-        } else {
-            return nil
+        components.path = path
+        components.queryItems = parameters.map {
+            URLQueryItem(name: $0.0, value: $0.1)
         }
+        return components.url
     }
 }
-
