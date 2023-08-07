@@ -37,6 +37,7 @@ final class ImageListRepository: ImageListRepositoryProtocol {
         //если есть, разворачиваем данные из кэша добавляем к общему хранилищу
         if let cachedData = imageListLocalDataSource.getImageItems(currentPage: currentPage){
             self.accessQueue.sync {
+                print("Loaded from cache data was added to the imagesInternalModel")
                 imagesInternalModel.append(contentsOf: cachedData)
             }
             //если кэша нет, то дергаем ручку
@@ -46,14 +47,17 @@ final class ImageListRepository: ImageListRepositoryProtocol {
                 switch result {
                 case .success(let resultedDTOModels):
                     guard let chechedResultedDTOModels = resultedDTOModels else {
+                        print("There was no DTOmodels to proccess")
                         completion(.failure(ImageListRepositoryError.internalErrorILR))
                         return
                     }
                     guard let internalModelPack = self?.trasferDTOToInternalModel(input: chechedResultedDTOModels) else {
+                        print("Errors with encoding process DTO to InternalModel")
                         completion(.failure(ImageListRepositoryError.internalErrorILR))
                         return
                     }
                     self?.accessQueue.sync {
+                        print("Loaded from API data was added to the imagesInternalModel")
                         self?.imagesInternalModel.append(contentsOf: internalModelPack)
                     }
                     
