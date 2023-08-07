@@ -4,21 +4,27 @@
 //
 //  Created by Sergey Nikiforov on 06.07.2023.
 //
+//класс, оркестратор, через который будет управляться бизнес-логика работы с загрузкой/сохранением данных по файлам
+//в ImageCollectionInteractor
 
 import UIKit
 
 protocol ImageListRepositoryProtocol {
     var imagesInternalModel: [ImageMetadata] {get}
-    func getImageItems(path: String, currentPage: Int, completion: @escaping (Result<[ImageMetadata]?, Error>) ->())
+    func getImageItems(currentPage: Int, completion: @escaping (Result<[ImageMetadata]?, ImageListRepository.ImageListRepositoryError>) ->())
 }
 
 final class ImageListRepository: ImageListRepositoryProtocol {
     
-    private enum ImageListRepositoryError: Error {
-        case serverError
-        case parsingError
-        case networkError
+    enum ImageListRepositoryError: Error {
+        case internalErrorILR
+        case externalErrorILR
     }
+    
+    //создаем очередь для синхронизации запросов
+    //к хранилищу данных по картинкам (imagesInternalModel)
+    //нужно
+    private let accessQueue = DispatchQueue(label: "ImageListRepository.accessQueue")
     
     //итоговое хранилище всех моделей для отображения
     var imagesInternalModel: [ImageMetadata] = []
@@ -26,24 +32,33 @@ final class ImageListRepository: ImageListRepositoryProtocol {
     private let imageListRemoteDataSource: ImageListRemoteDataSourceProtocol = ImageListRemoteDataSource()
     private let imageListLocalDataSource: ImageListLocalDataSourceProtocol = ImageListLocalDataSource()
     
-    func getImageItems(path: String, currentPage: Int, completion: @escaping (Result<[ImageMetadata]?, Error>) ->()) {
+    func getImageItems(currentPage: Int, completion: @escaping (Result<[ImageMetadata]?, ImageListRepository.ImageListRepositoryError>) ->()) {
         //проверяем есть ли кэшированные данные
         //если есть, разворачиваем данные из кэша добавляем к общему хранилищу
         if let cachedData = imageListLocalDataSource.getImageItems(currentPage: currentPage){
-            imagesInternalModel.append(contentsOf: cachedData)
+            self.accessQueue.sync {
+                imagesInternalModel.append(contentsOf: cachedData)
+            }
             //если кэша нет, то дергаем ручку
             //и разбираем ответ
         } else {
-            imageListRemoteDataSource.getDTOModels(currentPage: currentPage) { result in
+            imageListRemoteDataSource.getDTOModels(currentPage: currentPage) { [weak self] result in
                 switch result {
                 case .success(let resultedDTOModels):
                     guard let chechedResultedDTOModels = resultedDTOModels else {
+                        completion(.failure(ImageListRepositoryError.internalErrorILR))
                         return
                     }
-                    let internalModelPack = self.trasferDTOToInternalModel(input: chechedResultedDTOModels)
-                    self.imagesInternalModel.append(contentsOf: internalModelPack)
-                case .failure(_):
-                    return
+                    guard let internalModelPack = self?.trasferDTOToInternalModel(input: chechedResultedDTOModels) else {
+                        completion(.failure(ImageListRepositoryError.internalErrorILR))
+                        return
+                    }
+                    self?.accessQueue.sync {
+                        self?.imagesInternalModel.append(contentsOf: internalModelPack)
+                    }
+                    
+                case .failure(let error):
+                    completion(.failure(self?.convertImageListRemoteDataSourceErrorToImageListRepositoryError(input: error) ?? ImageListRepositoryError.internalErrorILR))
                 }
             }
         }
@@ -64,5 +79,16 @@ extension ImageListRepository {
                 user: item.user?.username ?? "No username"
             )
         }
+    }
+    
+    private func convertImageListRemoteDataSourceErrorToImageListRepositoryError(input: ImageListRemoteDataSource.ImageListRemoteDataSourceError) -> ImageListRepository.ImageListRepositoryError {
+        var output: ImageListRepository.ImageListRepositoryError
+        switch input {
+        case .internalError:
+            output = ImageListRepositoryError.internalErrorILR
+        case .externalError:
+            output = ImageListRepositoryError.externalErrorILR
+        }
+        return output
     }
 }

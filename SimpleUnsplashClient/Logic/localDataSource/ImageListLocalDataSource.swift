@@ -4,6 +4,7 @@
 //
 //  Created by Sergey Nikiforov on 06.07.2023.
 //
+//класс, который работает с сохранением в кэш/забором данных из кэша
 
 import Foundation
 

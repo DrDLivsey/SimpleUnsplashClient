@@ -17,8 +17,8 @@ protocol APIClientProtocol {
 final class APIClient: APIClientProtocol {
     
     enum APIClientError: Error {
-        case wrongURL(String)
-        case requestError(String)
+        case wrongURL
+        case requestError
     }
     
     private enum Constants {
@@ -35,19 +35,19 @@ final class APIClient: APIClientProtocol {
         
         guard let url = createURL(path: path, parameters: parameters) else {
             print("URL created for URLSession is broken")
-            completion(.failure(APIClientError.wrongURL("Couldn't create URL with requested data")))
+            completion(.failure(APIClientError.wrongURL))
             return
         }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
-            guard data != nil else {
+            guard let data = data else {
                 print("No data after URLSession has worked")
-                completion(.failure(APIClientError.requestError("No data from server")))
+                completion(.failure(APIClientError.requestError))
                 return
             }
             
-            completion(.success(data!))
+            completion(.success(data))
         }
         task.resume()
     }
