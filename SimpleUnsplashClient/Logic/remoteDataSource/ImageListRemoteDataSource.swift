@@ -10,15 +10,16 @@
 import Foundation
 
 protocol ImageListRemoteDataSourceProtocol {
-    func getDTOModels (currentPage: Int, completion: @escaping (Result<[ImageMetadataDTO]?, ImageListRemoteDataSource.ImageListRemoteDataSourceError>) ->())
-    
+    func getDTOModels (currentPage: Int,
+                       completion: @escaping (Result<[ImageMetadataDTO], ImageListRemoteDataSource.ImageListRemoteDataSourceError>
+                       ) ->())
 }
 
 final class ImageListRemoteDataSource: ImageListRemoteDataSourceProtocol {
     
     enum ImageListRemoteDataSourceError: Error {
         case internalError
-        case externalError
+        case networkError
     }
     
     private enum Constants {
@@ -27,22 +28,23 @@ final class ImageListRemoteDataSource: ImageListRemoteDataSourceProtocol {
     
     private let apiClient: APIClientProtocol = APIClient()
     
-    func getDTOModels (currentPage: Int, completion: @escaping (Result<[ImageMetadataDTO]?, ImageListRemoteDataSource.ImageListRemoteDataSourceError>) ->()) {
+    func getDTOModels (currentPage: Int,
+                       completion: @escaping (Result<[ImageMetadataDTO], ImageListRemoteDataSource.ImageListRemoteDataSourceError>
+                       ) ->())
+    {
         
         let parameters = ["page":String(currentPage)]
         
-        apiClient.requestData(path: Constants.endpoint, parameters: parameters) { [weak self] result in
+        apiClient.requestData(ofType:[ImageMetadataDTO].self ,path: Constants.endpoint, parameters: parameters) { [weak self] result in
+            guard let self = self else {
+                return
+            }
             switch result {
-            case .success(let response):
-                guard let resultedDTOModels = self?.convertJSONToDTO(imageDataFromAPI: response) else {
-                    print("Couldn't convert from JSON to DTOModels")
-                    completion(.failure(ImageListRemoteDataSourceError.internalError))
-                    return
-                }
-                completion(.success(resultedDTOModels))
+            case .success(let dtoModels):
+                completion(.success(dtoModels))
                 
             case .failure(let error):
-                completion(.failure(self?.convertAPIClientToDataSourceError(input: error) ?? ImageListRemoteDataSourceError.internalError))
+                completion(.failure(self.convertAPIClientToDataSourceError(input: error)))
             }
         }
     }
@@ -50,21 +52,15 @@ final class ImageListRemoteDataSource: ImageListRemoteDataSourceProtocol {
 
 
 extension ImageListRemoteDataSource {
-    private func convertJSONToDTO (imageDataFromAPI: Data) -> [ImageMetadataDTO]? {
-        do {
-            let result = try JSONDecoder().decode([ImageMetadataDTO].self, from: imageDataFromAPI)
-            return result
-        } catch {
-            return nil
-        }
-    }
     
     private func convertAPIClientToDataSourceError(input: APIClient.APIClientError) -> ImageListRemoteDataSource.ImageListRemoteDataSourceError {
         var output: ImageListRemoteDataSource.ImageListRemoteDataSourceError
         switch input {
-        case .requestError:
-            output = ImageListRemoteDataSourceError.externalError
         case .wrongURL:
+            output = ImageListRemoteDataSourceError.internalError
+        case .requestError:
+            output = ImageListRemoteDataSourceError.networkError
+        case.decodingError:
             output = ImageListRemoteDataSourceError.internalError
         }
         return output

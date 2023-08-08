@@ -10,7 +10,11 @@
 import Foundation
 
 protocol APIClientProtocol {
-    func requestData(path: String, parameters: [String:String], completion: @escaping (Result<Data, APIClient.APIClientError>) -> ())
+    func requestData<DTO:Decodable>(ofType type:DTO.Type,
+                                    path: String,
+                                    parameters: [String:String],
+                                    completion: @escaping (Result<DTO, APIClient.APIClientError>
+                                    ) -> ())
 }
 
 
@@ -19,6 +23,7 @@ final class APIClient: APIClientProtocol {
     enum APIClientError: Error {
         case wrongURL
         case requestError
+        case decodingError(Error)
     }
     
     private enum Constants {
@@ -27,8 +32,18 @@ final class APIClient: APIClientProtocol {
     }
     
     private let enviromentProvider: EnvironmentProviderProtocol = EnvironmentProvider()
+    private var decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
     
-    func requestData(path: String, parameters: [String:String], completion: @escaping (Result<Data, APIClient.APIClientError>) -> ()) {
+    func requestData<DTO:Decodable>(ofType type:DTO.Type,
+                                    path: String,
+                                    parameters: [String:String],
+                                    completion: @escaping (Result<DTO, APIClient.APIClientError>
+                                    ) -> ())
+    {
         
         var parameters = parameters
         parameters["client_id"] = enviromentProvider.getAPIKeyValue()
@@ -47,7 +62,15 @@ final class APIClient: APIClientProtocol {
                 return
             }
             
-            completion(.success(data))
+            do {
+                let result = try self.decoder.decode(DTO.self, from: data)
+                print("Model(s) was created. This is the result: \(result)")
+                completion(.success(result))
+            } catch let error {
+                print("Something went wrong during decoding process JSON-DTO")
+                completion(.failure(APIClientError.decodingError(error)))
+            }
+            
         }
         task.resume()
     }

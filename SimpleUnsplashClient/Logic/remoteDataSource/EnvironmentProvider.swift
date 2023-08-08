@@ -16,8 +16,7 @@ protocol EnvironmentProviderProtocol {
 
 final class EnvironmentProvider: EnvironmentProviderProtocol {
     func getAPIKeyValue() -> String? {
-        let key = "API_KEY"
-        return Bundle.main.object(forInfoDictionaryKey: key) as? String
+        return Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
     }
 }
 
