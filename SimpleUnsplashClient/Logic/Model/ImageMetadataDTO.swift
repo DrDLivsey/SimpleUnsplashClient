@@ -27,15 +27,15 @@ struct ImageUserDTO: Decodable {
 
 extension ImageMetadataDTO {
     var domainModel: ImageMetadata? {
-        guard let urls = urls else {
+        guard urls?.thumb != nil && urls?.regular != nil else {
             return nil
         }
         
         return ImageMetadata(description: description ?? altDescription ?? "No description",
                              color: color ?? "No color",
                              likes: likes ?? 0,
-                             imageThumb: urls.thumb,
-                             imageRegular: urls.regular,
+                             imageThumb: urls?.thumb,
+                             imageRegular: urls?.regular,
                              user: user?.username ?? "No username")
     }
 }
