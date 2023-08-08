@@ -8,11 +8,12 @@
 import UIKit
 
 struct ImageMetadata {
-    let description: String
+    let id: String
     let color: String
-    let likes: Int
+    let description: String
     let imageThumb: URL?
     let imageRegular: URL?
+    let likes: Int
     let user: String
 }
 

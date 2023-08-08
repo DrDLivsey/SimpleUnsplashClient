@@ -11,8 +11,7 @@ import Foundation
 
 protocol ImageListRemoteDataSourceProtocol {
     func getDTOModels (currentPage: Int,
-                       completion: @escaping (Result<[ImageMetadataDTO], ImageListRemoteDataSource.ImageListRemoteDataSourceError>
-                       ) ->())
+                       completion: @escaping (Result<[ImageMetadataDTO], ImageListRemoteDataSource.ImageListRemoteDataSourceError>) -> ())
 }
 
 final class ImageListRemoteDataSource: ImageListRemoteDataSourceProtocol {
@@ -29,8 +28,7 @@ final class ImageListRemoteDataSource: ImageListRemoteDataSourceProtocol {
     private let apiClient: APIClientProtocol = APIClient()
     
     func getDTOModels (currentPage: Int,
-                       completion: @escaping (Result<[ImageMetadataDTO], ImageListRemoteDataSource.ImageListRemoteDataSourceError>
-                       ) ->())
+                       completion: @escaping (Result<[ImageMetadataDTO], ImageListRemoteDataSource.ImageListRemoteDataSourceError>) -> ())
     {
         
         let parameters = ["page":String(currentPage)]
@@ -51,7 +49,7 @@ final class ImageListRemoteDataSource: ImageListRemoteDataSourceProtocol {
 }
 
 
-extension ImageListRemoteDataSource {
+private extension ImageListRemoteDataSource {
     
     private func convertAPIClientToDataSourceError(input: APIClient.APIClientError) -> ImageListRemoteDataSource.ImageListRemoteDataSourceError {
         var output: ImageListRemoteDataSource.ImageListRemoteDataSourceError

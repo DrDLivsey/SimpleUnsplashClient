@@ -13,8 +13,7 @@ protocol APIClientProtocol {
     func requestData<DTO:Decodable>(ofType type:DTO.Type,
                                     path: String,
                                     parameters: [String:String],
-                                    completion: @escaping (Result<DTO, APIClient.APIClientError>
-                                    ) -> ())
+                                    completion: @escaping (Result<DTO, APIClient.APIClientError>) -> ())
 }
 
 
@@ -41,8 +40,7 @@ final class APIClient: APIClientProtocol {
     func requestData<DTO:Decodable>(ofType type:DTO.Type,
                                     path: String,
                                     parameters: [String:String],
-                                    completion: @escaping (Result<DTO, APIClient.APIClientError>
-                                    ) -> ())
+                                    completion: @escaping (Result<DTO, APIClient.APIClientError>) -> ())
     {
         
         var parameters = parameters
@@ -78,7 +76,7 @@ final class APIClient: APIClientProtocol {
 
 
 
-extension APIClient {
+private extension APIClient {
     
     private func createURL(path: String, parameters: [String:String]) -> URL? {
         var components = URLComponents()

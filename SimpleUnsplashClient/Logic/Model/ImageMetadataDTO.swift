@@ -8,6 +8,7 @@
 import Foundation
 
 struct ImageMetadataDTO: Decodable {
+    let id: String?
     let color: String?
     let description: String?
     let altDescription: String?
@@ -23,19 +24,4 @@ struct ImageUrlsDTO: Decodable {
 
 struct ImageUserDTO: Decodable {
     let username: String?
-}
-
-extension ImageMetadataDTO {
-    var domainModel: ImageMetadata? {
-        guard urls?.thumb != nil && urls?.regular != nil else {
-            return nil
-        }
-        
-        return ImageMetadata(description: description ?? altDescription ?? "No description",
-                             color: color ?? "No color",
-                             likes: likes ?? 0,
-                             imageThumb: urls?.thumb,
-                             imageRegular: urls?.regular,
-                             user: user?.username ?? "No username")
-    }
 }
