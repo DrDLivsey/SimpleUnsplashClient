@@ -8,18 +8,16 @@
 import UIKit
 
 protocol ImageCollectionRouterInput: AnyObject {
-    func openImage(alias: String)
+    func openImage(imgID: String)
 }
 
 final class ImageCollectionRouter {
-    
     weak var view: UIViewController?
 }
 
 extension ImageCollectionRouter: ImageCollectionRouterInput {
-    func openGame(alias: String) {
-        let imageDetailVC = ImageCollectionBuilder.make()(imageAlias: String)
-        
-        
+    func openImage(imgID: String) {
+        let imageDetailVC = ImageDetailBuilder().make(imgID: imgID)
+        view?.navigationController?.pushViewController(imageDetailVC, animated: true)
     }
 }

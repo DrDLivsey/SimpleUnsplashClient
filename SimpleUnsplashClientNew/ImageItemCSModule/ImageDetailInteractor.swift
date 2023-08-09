@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol ImageDetailInteractorInput: AnyObject {
+    
+}
+
+final class ImageDetailInteractor: ImageDetailInteractorInput {}

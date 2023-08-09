@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+protocol ImageDetailPresenterInput: AnyObject {
+}
+
+final class ImageDetailPresenter: ImageDetailPresenterInput {
+    
+}

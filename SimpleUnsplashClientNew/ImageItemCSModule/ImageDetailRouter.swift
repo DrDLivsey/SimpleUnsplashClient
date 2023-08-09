@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol ImageDetailRouterInput: AnyObject {
+    
+}
+
+final class ImageDetailRouter: ImageDetailRouterInput {
+    
+}

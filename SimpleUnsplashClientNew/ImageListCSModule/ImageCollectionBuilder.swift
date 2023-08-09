@@ -16,14 +16,14 @@ final class ImageCollectionBuilder {
     func make() -> UIViewController {
         let presenter = ImageCollectionPresenter()
         let router = ImageCollectionRouter()
-        let interactor = ImageCollectionInteractor(
-            presenter: presenter,
-            router: router
-        )
-        let vc = ImageCollectionVC()
+        let interactor = ImageCollectionInteractor(presenter: presenter,
+                                                   router: router,
+                                                   imageListRepository: ImageListRepository())
         
-        router.view = vc
+        let vc = ImageCollectionVC(intercator: interactor)
+        
         presenter.view = vc
+        router.view = vc
         
         return vc
     }

@@ -10,13 +10,14 @@ import Kingfisher
 
 protocol ImageCollectionPresenterInput {
     func showLoading()
-    func present(imageCollection: [ImageMetadata])
+    func showLoadingError(_ error: Error)
+    func show(imageCollection: [ImageMetadata])
 }
 
 final class ImageCollectionPresenter {
     
     weak var view: ImageCollectionVCInput?
-
+    
 }
 
 extension ImageCollectionPresenter: ImageCollectionPresenterInput {
@@ -24,16 +25,20 @@ extension ImageCollectionPresenter: ImageCollectionPresenterInput {
     func showLoading() {
         view?.configure(state: .loading)
     }
-
-    func present(imageCollection: [ImageMetadata]){
-        let imagesForDisplay = imageCollection.map { metadata -> ImageCollectionCellModel in
-            let cellModel = ImageCollectionCellModel(imageURL: metadata.imageThumb,
-                                                     imageDescription: NSAttributedString(string: "\(metadata.description)",
-                                                                                          attributes: [NSAttributedString.Key.foregroundColor : UIColor(hex: metadata.color)]),
-                                                     imageLikes: String(metadata.likes))
-            return cellModel
+    
+    func showLoadingError(_ error: Error) {
+        view?.configure(state: .loadingError(error))
+    }
+    
+    func show(imageCollection: [ImageMetadata]) {
+        let imagesItems = imageCollection.map { metadata -> ImageCollectionCellModel in
+            let cellModel = ImageCollectionCellModel(
+                imageURL: metadata.imageThumb,
+                imageDescription: NSAttributedString(string: "\(metadata.description)",
+                                                     attributes: [NSAttributedString.Key.foregroundColor:UIColor(hex: metadata.color)]),
+                imageLikes: String(metadata.likes)
+            )
+            
         }
-        
-//        viewController?.display(imagesForDisplay)
     }
 }

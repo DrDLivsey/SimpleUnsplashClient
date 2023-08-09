@@ -21,13 +21,16 @@
 		F6A3F9E82A836A4D001A2117 /* EnvironmentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9E72A836A4D001A2117 /* EnvironmentProvider.swift */; };
 		F6A3F9EA2A836A6A001A2117 /* ImageListRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9E92A836A6A001A2117 /* ImageListRemoteDataSource.swift */; };
 		F6A3F9ED2A836AFF001A2117 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9EC2A836AFF001A2117 /* Spinner.swift */; };
+		F6A814482A83A7CB0084F0EB /* ImageCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A814472A83A7CB0084F0EB /* ImageCollectionCellModel.swift */; };
+		F6A8144A2A83B7C30084F0EB /* ImageCollectionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A814492A83B7C30084F0EB /* ImageCollectionViewState.swift */; };
+		F6A8144D2A83C9D10084F0EB /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A8144C2A83C9D10084F0EB /* Alert.swift */; };
+		F6A814512A83E0EC0084F0EB /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A814502A83E0EC0084F0EB /* CollectionViewController.swift */; };
 		F6C846F52A835FB80057E381 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846F42A835FB80057E381 /* Extensions.swift */; };
 		F6C846F82A835FFA0057E381 /* ImageDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846F72A835FFA0057E381 /* ImageDetailBuilder.swift */; };
 		F6C846FA2A8360180057E381 /* ImageDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846F92A8360180057E381 /* ImageDetailInteractor.swift */; };
 		F6C846FC2A83602A0057E381 /* ImageDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846FB2A83602A0057E381 /* ImageDetailPresenter.swift */; };
 		F6C846FE2A83603E0057E381 /* ImageDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846FD2A83603E0057E381 /* ImageDetailRouter.swift */; };
 		F6C847002A8360530057E381 /* ImageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846FF2A8360530057E381 /* ImageDetailVC.swift */; };
-		F6C847022A8360900057E381 /* ImageItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C847012A8360900057E381 /* ImageItemModel.swift */; };
 		F6C8470A2A83626B0057E381 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C847082A83626A0057E381 /* ImageCollectionCell.swift */; };
 		F6C8470B2A83626B0057E381 /* ImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6C847092A83626B0057E381 /* ImageCollectionCell.xib */; };
 		F6F08F012A835BFC009A3696 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F08F002A835BFC009A3696 /* AppDelegate.swift */; };
@@ -54,13 +57,16 @@
 		F6A3F9E72A836A4D001A2117 /* EnvironmentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentProvider.swift; sourceTree = "<group>"; };
 		F6A3F9E92A836A6A001A2117 /* ImageListRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListRemoteDataSource.swift; sourceTree = "<group>"; };
 		F6A3F9EC2A836AFF001A2117 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		F6A814472A83A7CB0084F0EB /* ImageCollectionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCellModel.swift; sourceTree = "<group>"; };
+		F6A814492A83B7C30084F0EB /* ImageCollectionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewState.swift; sourceTree = "<group>"; };
+		F6A8144C2A83C9D10084F0EB /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		F6A814502A83E0EC0084F0EB /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		F6C846F42A835FB80057E381 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F6C846F72A835FFA0057E381 /* ImageDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailBuilder.swift; sourceTree = "<group>"; };
 		F6C846F92A8360180057E381 /* ImageDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailInteractor.swift; sourceTree = "<group>"; };
 		F6C846FB2A83602A0057E381 /* ImageDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailPresenter.swift; sourceTree = "<group>"; };
 		F6C846FD2A83603E0057E381 /* ImageDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailRouter.swift; sourceTree = "<group>"; };
 		F6C846FF2A8360530057E381 /* ImageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailVC.swift; sourceTree = "<group>"; };
-		F6C847012A8360900057E381 /* ImageItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItemModel.swift; sourceTree = "<group>"; };
 		F6C847082A83626A0057E381 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
 		F6C847092A83626B0057E381 /* ImageCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionCell.xib; sourceTree = "<group>"; };
 		F6F08EFD2A835BFC009A3696 /* SimpleUnsplashClientNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleUnsplashClientNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				F6A3F9EC2A836AFF001A2117 /* Spinner.swift */,
+				F6A8144C2A83C9D10084F0EB /* Alert.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -175,12 +182,11 @@
 		F6C846F62A835FD90057E381 /* ImageItemCSModule */ = {
 			isa = PBXGroup;
 			children = (
-				F6C846F72A835FFA0057E381 /* ImageDetailBuilder.swift */,
-				F6C846F92A8360180057E381 /* ImageDetailInteractor.swift */,
-				F6C846FB2A83602A0057E381 /* ImageDetailPresenter.swift */,
-				F6C846FD2A83603E0057E381 /* ImageDetailRouter.swift */,
 				F6C846FF2A8360530057E381 /* ImageDetailVC.swift */,
-				F6C847012A8360900057E381 /* ImageItemModel.swift */,
+				F6C846FB2A83602A0057E381 /* ImageDetailPresenter.swift */,
+				F6C846F92A8360180057E381 /* ImageDetailInteractor.swift */,
+				F6C846F72A835FFA0057E381 /* ImageDetailBuilder.swift */,
+				F6C846FD2A83603E0057E381 /* ImageDetailRouter.swift */,
 			);
 			path = ImageItemCSModule;
 			sourceTree = "<group>";
@@ -189,9 +195,9 @@
 			isa = PBXGroup;
 			children = (
 				F6C847042A83613A0057E381 /* View */,
-				F6A3F9CE2A836424001A2117 /* ImageCollectionBuilder.swift */,
-				F6A3F9D02A83643E001A2117 /* ImageCollectionInteractor.swift */,
 				F6A3F9D22A83645F001A2117 /* ImageCollectionPresenter.swift */,
+				F6A3F9D02A83643E001A2117 /* ImageCollectionInteractor.swift */,
+				F6A3F9CE2A836424001A2117 /* ImageCollectionBuilder.swift */,
 				F6A3F9D42A836478001A2117 /* ImageCollectionRouter.swift */,
 			);
 			path = ImageListCSModule;
@@ -202,6 +208,8 @@
 			children = (
 				F6C847052A8361430057E381 /* ImageCollectionCell */,
 				F6A3F9CC2A8363E7001A2117 /* ImageCollectionVC.swift */,
+				F6A814502A83E0EC0084F0EB /* CollectionViewController.swift */,
+				F6A814492A83B7C30084F0EB /* ImageCollectionViewState.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -209,8 +217,9 @@
 		F6C847052A8361430057E381 /* ImageCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
-				F6C847082A83626A0057E381 /* ImageCollectionCell.swift */,
 				F6C847092A83626B0057E381 /* ImageCollectionCell.xib */,
+				F6C847082A83626A0057E381 /* ImageCollectionCell.swift */,
+				F6A814472A83A7CB0084F0EB /* ImageCollectionCellModel.swift */,
 			);
 			path = ImageCollectionCell;
 			sourceTree = "<group>";
@@ -238,6 +247,7 @@
 			children = (
 				F6F08F002A835BFC009A3696 /* AppDelegate.swift */,
 				F6F08F022A835BFC009A3696 /* SceneDelegate.swift */,
+				F6F08F0E2A835BFE009A3696 /* Info.plist */,
 				F6A3F9EE2A836B2D001A2117 /* Storyboards */,
 				F6C846F62A835FD90057E381 /* ImageItemCSModule */,
 				F6C847032A8361190057E381 /* ImageListCSModule */,
@@ -245,7 +255,6 @@
 				F6A3F9EB2A836AED001A2117 /* SharedViews */,
 				F6C846F32A835F9E0057E381 /* Helpers */,
 				F6F08F092A835BFE009A3696 /* Assets.xcassets */,
-				F6F08F0E2A835BFE009A3696 /* Info.plist */,
 			);
 			path = SimpleUnsplashClientNew;
 			sourceTree = "<group>";
@@ -366,10 +375,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6A814512A83E0EC0084F0EB /* CollectionViewController.swift in Sources */,
 				F6A3F9EA2A836A6A001A2117 /* ImageListRemoteDataSource.swift in Sources */,
 				F6A3F9DE2A8369B1001A2117 /* ImageItem.swift in Sources */,
 				F6A3F9E82A836A4D001A2117 /* EnvironmentProvider.swift in Sources */,
+				F6A8144D2A83C9D10084F0EB /* Alert.swift in Sources */,
 				F6A3F9D32A83645F001A2117 /* ImageCollectionPresenter.swift in Sources */,
+				F6A8144A2A83B7C30084F0EB /* ImageCollectionViewState.swift in Sources */,
+				F6A814482A83A7CB0084F0EB /* ImageCollectionCellModel.swift in Sources */,
 				F6A3F9D52A836478001A2117 /* ImageCollectionRouter.swift in Sources */,
 				F6C846FC2A83602A0057E381 /* ImageDetailPresenter.swift in Sources */,
 				F6C8470A2A83626B0057E381 /* ImageCollectionCell.swift in Sources */,
@@ -378,7 +391,6 @@
 				F6A3F9E22A8369F8001A2117 /* ImageListRepository.swift in Sources */,
 				F6F08F012A835BFC009A3696 /* AppDelegate.swift in Sources */,
 				F6C846F82A835FFA0057E381 /* ImageDetailBuilder.swift in Sources */,
-				F6C847022A8360900057E381 /* ImageItemModel.swift in Sources */,
 				F6A3F9E02A8369CE001A2117 /* ImageMetadataDTO.swift in Sources */,
 				F6A3F9D12A83643E001A2117 /* ImageCollectionInteractor.swift in Sources */,
 				F6C846FA2A8360180057E381 /* ImageDetailInteractor.swift in Sources */,

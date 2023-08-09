@@ -5,8 +5,15 @@
 //  Created by Sergey Nikiforov on 09.08.2023.
 //
 
-//import UIKit
-//
+import UIKit
+
+protocol ImageDetailVCInput: AnyObject {
+
+}
+
+final class ImageDetailVC: ImageDetailVCInput {
+    
+}
 //class ImageDetailVC: UIViewController {
 //
 //    private var selectedImageItem: ImageItemProtocol = ImageItem(description: "",

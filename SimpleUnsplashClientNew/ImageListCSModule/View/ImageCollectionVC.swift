@@ -13,22 +13,26 @@ protocol ImageCollectionVCInput: AnyObject {
 
 final class ImageCollectionVC: UICollectionViewController {
     
-    private var intercator: ImageCollectionInteractorInput?
+    private var intercator: ImageCollectionInteractorInput
     private var dataToDisplay: [ImageCollectionCellModel] = []
     
+    var spinner = Spinner()
+    var alert = Alert()
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(intercator: ImageCollectionInteractorInput){
+        self.intercator = intercator
+        
+        super.init(nibName: String?, bundle: Bundle?)
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad() {   
         super.viewDidLoad()
         
-        intercator?.loadImages()
+        
     }
     
 }
@@ -38,15 +42,24 @@ extension ImageCollectionVC: ImageCollectionVCInput {
     func configure(state: ImageCollectionViewState) {
         switch state {
         case .loading:
-            self.state = .loading
+            spinner.configureForLoadingScreen()
+            spinner.startAnimating()
+            view.addSubview(spinner)
             
         case .loadingError(let error):
-            self.state = .loading
-            loadingView.showError(message: error.localizedDescription)
+            self.present(alert.configureForRetryError(error), animated: true)
             
-        case .content(let content):
-            self.state = .content
-            collectionView.setItems(items: content.ImageCollectionItems)
+            
+        case .content
+            dataToDisplay
         }
     }
 }
+
+extension ImageCollectionVC {
+    func didTapRetry() {
+        intercator.didTapRetryLoading()
+    }
+}
+
+

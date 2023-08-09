@@ -9,14 +9,14 @@ import UIKit
 
 final class Spinner: UIView {
     
-    private let spinner = UIActivityIndicatorView(style: .large)
-    private let label = UILabel()
+    let spinner = UIActivityIndicatorView(style: .large)
+    let label = UILabel()
     
-    private func startAnimating() {
+    func startAnimating() {
         spinner.startAnimating()
     }
     
-    private func stopAnimating() {
+    func stopAnimating() {
         spinner.stopAnimating()
     }
     
