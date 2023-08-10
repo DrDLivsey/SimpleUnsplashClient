@@ -8,8 +8,11 @@
 import Foundation
 
 protocol ImageListRemoteDataSourceProtocol {
-    func getDTOModels (currentPage: Int,
-                       completion: @escaping (Result<[ImageMetadataDTO], ImageListRemoteDataSource.ImageListRemoteDataSourceError>) -> ())
+    func getDTOModels (
+        currentPage: Int,
+        completion: @escaping (Result<[ImageMetadataDTO], ImageListRemoteDataSource.ImageListRemoteDataSourceError>
+        ) -> Void
+    )
 }
 
 final class ImageListRemoteDataSource: ImageListRemoteDataSourceProtocol {
@@ -20,18 +23,26 @@ final class ImageListRemoteDataSource: ImageListRemoteDataSourceProtocol {
     }
     
     private enum Constants {
-        static let endpoint = "photos"
+        static let endpoint = "/photos/"
     }
     
     private let apiClient: APIClientProtocol = APIClient()
     
-    func getDTOModels (currentPage: Int,
-                       completion: @escaping (Result<[ImageMetadataDTO], ImageListRemoteDataSource.ImageListRemoteDataSourceError>) -> ())
-    {
+    func getDTOModels (
+        currentPage: Int,
+        completion: @escaping (
+            Result<[ImageMetadataDTO],
+            ImageListRemoteDataSource.ImageListRemoteDataSourceError>
+        ) -> Void
+    ) {
+
+        let parameters = ["page": String(currentPage)]
         
-        let parameters = ["page":String(currentPage)]
-        
-        apiClient.requestData(ofType:[ImageMetadataDTO].self ,path: Constants.endpoint, parameters: parameters) { [weak self] result in
+        apiClient.requestData(
+            ofType: [ImageMetadataDTO].self,
+            path: Constants.endpoint,
+            parameters: parameters
+        ) { [weak self] result in
             guard let self = self else {
                 return
             }

@@ -8,9 +8,28 @@
 import UIKit
 
 protocol ImageDetailBuilderProtocol {
-    func make(imgID:String) -> UIViewController
+    func make(imgID: String) -> UIViewController
 }
 
 final class ImageDetailBuilder: ImageDetailBuilderProtocol {
-    func make(imgID: String) -> UIViewController {}
+    
+    func make(imgID: String) -> UIViewController {
+        
+        let presenter = ImageDetailPresenter()
+        let router = ImageDetailRouter()
+        let interactor = ImageDetailInteractor(
+            presenter: presenter,
+            router: router,
+            imageListRepository: ImageListRepository.sharedInstance,
+            imgID: imgID
+        )
+        
+        
+        let imageDetailVC = ImageDetailVC(interactor: interactor)
+        
+        presenter.view = imageDetailVC
+        router.view = imageDetailVC
+        
+        return imageDetailVC
+    }
 }

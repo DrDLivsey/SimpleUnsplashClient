@@ -31,9 +31,9 @@ final class ImageListLocalDataSource: ImageListLocalDataSourceProtocol {
         self.cache.setObject(ImageStorageWrapper(wrapper: imageItems), forKey: nsCurrentPage)
     }
     
-    //класс-обертка, куда помещается коллекция экземпляров
-    //ImageMetadata для корректной работы с NSCache(принимает только классы)
-    //ImageMetadata - структура
+    // класс-обертка, куда помещается коллекция экземпляров
+    // ImageMetadata для корректной работы с NSCache(принимает только классы)
+    // ImageMetadata - структура
     private class ImageStorageWrapper {
         
         let wrapper: [ImageMetadata]

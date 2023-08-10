@@ -11,20 +11,21 @@ protocol ImageCollectionBuilderProtocol: AnyObject {
     func make() -> UIViewController
 }
 
-final class ImageCollectionBuilder {
-    
+final class ImageCollectionBuilder: ImageCollectionBuilderProtocol {
     func make() -> UIViewController {
         let presenter = ImageCollectionPresenter()
         let router = ImageCollectionRouter()
-        let interactor = ImageCollectionInteractor(presenter: presenter,
-                                                   router: router,
-                                                   imageListRepository: ImageListRepository())
+        let interactor = ImageCollectionInteractor(
+            presenter: presenter,
+            router: router,
+            imageListRepository: ImageListRepository.sharedInstance
+        )
         
-        let vc = ImageCollectionVC(intercator: interactor)
-        
-        presenter.view = vc
-        router.view = vc
-        
-        return vc
+        let imageCollectionVC = ImageCollectionVC(intercator: interactor)
+
+        presenter.view = imageCollectionVC
+        router.view = imageCollectionVC
+
+        return imageCollectionVC
     }
 }

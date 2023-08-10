@@ -8,15 +8,16 @@
 import Foundation
 
 protocol APIClientProtocol {
-    func requestData<DTO:Decodable>(ofType type:DTO.Type,
-                                    path: String,
-                                    parameters: [String:String],
-                                    completion: @escaping (Result<DTO, APIClient.APIClientError>) -> ())
+    func requestData<DTO: Decodable>(
+        ofType type: DTO.Type,
+        path: String,
+        parameters: [String: String],
+        completion: @escaping (Result<DTO, APIClient.APIClientError>) -> Void
+    )
 }
 
 
 final class APIClient: APIClientProtocol {
-    
     enum APIClientError: Error {
         case wrongURL
         case requestError
@@ -35,12 +36,12 @@ final class APIClient: APIClientProtocol {
         return decoder
     }()
     
-    func requestData<DTO:Decodable>(ofType type:DTO.Type,
-                                    path: String,
-                                    parameters: [String:String],
-                                    completion: @escaping (Result<DTO, APIClient.APIClientError>) -> ())
-    {
-        
+    func requestData<DTO: Decodable>(
+        ofType type: DTO.Type,
+        path: String,
+        parameters: [String: String],
+        completion: @escaping (Result<DTO, APIClient.APIClientError>) -> Void
+    ) {
         var parameters = parameters
         parameters["client_id"] = enviromentProvider.getAPIKeyValue()
         
@@ -50,8 +51,7 @@ final class APIClient: APIClientProtocol {
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
                 print("No data after URLSession has worked")
                 completion(.failure(APIClientError.requestError))
@@ -66,17 +66,13 @@ final class APIClient: APIClientProtocol {
                 print("Something went wrong during decoding process JSON-DTO")
                 completion(.failure(APIClientError.decodingError(error)))
             }
-            
         }
         task.resume()
     }
 }
 
-
-
 private extension APIClient {
-    
-    private func createURL(path: String, parameters: [String:String]) -> URL? {
+    private func createURL(path: String, parameters: [String: String]) -> URL? {
         var components = URLComponents()
         components.scheme = Constants.scheme
         components.host = Constants.domain

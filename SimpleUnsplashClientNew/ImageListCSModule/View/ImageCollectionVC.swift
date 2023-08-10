@@ -13,16 +13,19 @@ protocol ImageCollectionVCInput: AnyObject {
 
 final class ImageCollectionVC: UICollectionViewController {
     
-    private var intercator: ImageCollectionInteractorInput
-    private var dataToDisplay: [ImageCollectionCellModel] = []
-    
     var spinner = Spinner()
     var alert = Alert()
     
-    init(intercator: ImageCollectionInteractorInput){
-        self.intercator = intercator
+    private var interactor: ImageCollectionInteractorInput
+    private var builder: ImageCollectionBuilderProtocol = ImageCollectionBuilder()
+    
+    private var dataToDisplay: [ImageCollectionCellModel] = []
+    private var currentPage = 1
+    
+    init(intercator: ImageCollectionInteractorInput) {
+        self.interactor = intercator
         
-        super.init(nibName: String?, bundle: Bundle?)
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
     required init?(coder: NSCoder) {
@@ -31,14 +34,43 @@ final class ImageCollectionVC: UICollectionViewController {
     
     override func viewDidLoad() {   
         super.viewDidLoad()
+        let cellTypeNib = UINib(nibName: "ImageCollectionCell", bundle: nil)
+        collectionView.register(cellTypeNib, forCellWithReuseIdentifier: "ImageCollectionCell")
+        collectionView.dataSource = self
         
-        
+        interactor.viewDidLoad(currenPage: currentPage)
+        self.setupLayout()
     }
     
+    // MARK: UICollectionViewDataSource
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataToDisplay.count
+    }
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "ImageCollectionCell",
+            for: indexPath
+        )
+
+        guard let checkedCell = (cell as? ImageCollectionCell) else {
+            return cell
+        }
+        
+        checkedCell.configure(model: dataToDisplay[indexPath.row])
+        return checkedCell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        interactor.didTapImage(imgID: dataToDisplay[indexPath.row].imageID)
+    }
 }
 
 extension ImageCollectionVC: ImageCollectionVCInput {
-    
     func configure(state: ImageCollectionViewState) {
         switch state {
         case .loading:
@@ -48,18 +80,48 @@ extension ImageCollectionVC: ImageCollectionVCInput {
             
         case .loadingError(let error):
             self.present(alert.configureForRetryError(error), animated: true)
+            alert.addAction(UIAlertAction(
+                title: "Да",
+                style: .default)
+            )
             
             
-        case .content
-            dataToDisplay
+        case .content(let imagesForCollection):
+            spinner.stopAnimating()
+            spinner.removeFromSuperview()
+            dataToDisplay = imagesForCollection
+            currentPage += 1
+            collectionView.reloadData()
         }
     }
 }
 
 extension ImageCollectionVC {
     func didTapRetry() {
-        intercator.didTapRetryLoading()
+        interactor.didTapRetryLoading()
     }
 }
 
-
+extension ImageCollectionVC {
+    // настройка отображения UICollection
+    private func setupLayout() {
+        let layout = UICollectionViewFlowLayout()
+        
+        layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: 150, height: 150)
+        collectionView.contentInsetAdjustmentBehavior = .always
+        
+        layout.sectionInsetReference = .fromSafeArea
+        layout.sectionInset.top = 0
+        layout.sectionInset.bottom = 0
+        layout.sectionInset.left = 30
+        layout.sectionInset.right = 30
+        
+        
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        
+        self.collectionView.collectionViewLayout = layout
+        
+    }
+}

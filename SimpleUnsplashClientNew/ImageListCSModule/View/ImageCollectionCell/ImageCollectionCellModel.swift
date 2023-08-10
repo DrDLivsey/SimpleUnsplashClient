@@ -9,7 +9,9 @@ import Foundation
 
 
 struct ImageCollectionCellModel {
-    let imageURL: URL?
+    let imageID: String
+    let imageURLThumb: URL?
     let imageDescription: NSAttributedString
     let imageLikes: String
+    
 }

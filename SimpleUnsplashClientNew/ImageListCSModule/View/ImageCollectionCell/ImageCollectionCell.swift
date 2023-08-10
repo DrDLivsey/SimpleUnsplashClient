@@ -8,19 +8,18 @@
 import UIKit
 import Kingfisher
 
-//класс для отображения
+// класс для отображения
 final class ImageCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var imageThumb: UIImageView?
     @IBOutlet weak var imageDescription: UILabel?
     @IBOutlet weak var imageLikes: UILabel?
     
-    //метод конфигурирования ячейки для списка
-    private func configure(model: ImageCollectionCellModel) {
-//        imageThumb = model.imageURL
+    // метод конфигурирования ячейки для списка
+    func configure(model: ImageCollectionCellModel) {
+        imageThumb?.kf.setImage(with: model.imageURLThumb)
         imageDescription?.attributedText = model.imageDescription
-        imageLikes?.text = model.imageLikes
-        
+        imageLikes?.text = "Likes: \(model.imageLikes)"
     }
     
 }

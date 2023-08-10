@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		100F010A18709A53467BAFE8 /* Pods_SimpleUnsplashClientNew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DE3AFA7F12587C4E17FD3B3 /* Pods_SimpleUnsplashClientNew.framework */; };
+		F60B91022A85397700CC458F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F60B91012A85397700CC458F /* .swiftlint.yml */; };
 		F6A3F9CD2A8363E7001A2117 /* ImageCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9CC2A8363E7001A2117 /* ImageCollectionVC.swift */; };
 		F6A3F9CF2A836424001A2117 /* ImageCollectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9CE2A836424001A2117 /* ImageCollectionBuilder.swift */; };
 		F6A3F9D12A83643E001A2117 /* ImageCollectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9D02A83643E001A2117 /* ImageCollectionInteractor.swift */; };
 		F6A3F9D32A83645F001A2117 /* ImageCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9D22A83645F001A2117 /* ImageCollectionPresenter.swift */; };
 		F6A3F9D52A836478001A2117 /* ImageCollectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9D42A836478001A2117 /* ImageCollectionRouter.swift */; };
-		F6A3F9DE2A8369B1001A2117 /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9DD2A8369B1001A2117 /* ImageItem.swift */; };
+		F6A3F9DE2A8369B1001A2117 /* ImageMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9DD2A8369B1001A2117 /* ImageMetadata.swift */; };
 		F6A3F9E02A8369CE001A2117 /* ImageMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9DF2A8369CE001A2117 /* ImageMetadataDTO.swift */; };
 		F6A3F9E22A8369F8001A2117 /* ImageListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9E12A8369F8001A2117 /* ImageListRepository.swift */; };
 		F6A3F9E42A836A17001A2117 /* ImageListLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9E32A836A17001A2117 /* ImageListLocalDataSource.swift */; };
@@ -24,7 +25,8 @@
 		F6A814482A83A7CB0084F0EB /* ImageCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A814472A83A7CB0084F0EB /* ImageCollectionCellModel.swift */; };
 		F6A8144A2A83B7C30084F0EB /* ImageCollectionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A814492A83B7C30084F0EB /* ImageCollectionViewState.swift */; };
 		F6A8144D2A83C9D10084F0EB /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A8144C2A83C9D10084F0EB /* Alert.swift */; };
-		F6A814512A83E0EC0084F0EB /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A814502A83E0EC0084F0EB /* CollectionViewController.swift */; };
+		F6A814552A84BE170084F0EB /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A814542A84BE170084F0EB /* StartScreen.swift */; };
+		F6A814572A84F8B30084F0EB /* ImageDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A814562A84F8B30084F0EB /* ImageDetailModel.swift */; };
 		F6C846F52A835FB80057E381 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846F42A835FB80057E381 /* Extensions.swift */; };
 		F6C846F82A835FFA0057E381 /* ImageDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846F72A835FFA0057E381 /* ImageDetailBuilder.swift */; };
 		F6C846FA2A8360180057E381 /* ImageDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846F92A8360180057E381 /* ImageDetailInteractor.swift */; };
@@ -44,12 +46,13 @@
 		7DE3AFA7F12587C4E17FD3B3 /* Pods_SimpleUnsplashClientNew.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleUnsplashClientNew.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8483F41925B7DA7F97456736 /* Pods-SimpleUnsplashClientNew.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleUnsplashClientNew.release.xcconfig"; path = "Target Support Files/Pods-SimpleUnsplashClientNew/Pods-SimpleUnsplashClientNew.release.xcconfig"; sourceTree = "<group>"; };
 		A9A3304DDCA5DE6514A3EC82 /* Pods-SimpleUnsplashClientNew.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleUnsplashClientNew.debug.xcconfig"; path = "Target Support Files/Pods-SimpleUnsplashClientNew/Pods-SimpleUnsplashClientNew.debug.xcconfig"; sourceTree = "<group>"; };
+		F60B91012A85397700CC458F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F6A3F9CC2A8363E7001A2117 /* ImageCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionVC.swift; sourceTree = "<group>"; };
-		F6A3F9CE2A836424001A2117 /* ImageCollectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionBuilder.swift; sourceTree = "<group>"; };
+		F6A3F9CE2A836424001A2117 /* ImageCollectionBuilder.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionBuilder.swift; sourceTree = "<group>"; tabWidth = 4; };
 		F6A3F9D02A83643E001A2117 /* ImageCollectionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionInteractor.swift; sourceTree = "<group>"; };
 		F6A3F9D22A83645F001A2117 /* ImageCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionPresenter.swift; sourceTree = "<group>"; };
 		F6A3F9D42A836478001A2117 /* ImageCollectionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionRouter.swift; sourceTree = "<group>"; };
-		F6A3F9DD2A8369B1001A2117 /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
+		F6A3F9DD2A8369B1001A2117 /* ImageMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMetadata.swift; sourceTree = "<group>"; };
 		F6A3F9DF2A8369CE001A2117 /* ImageMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMetadataDTO.swift; sourceTree = "<group>"; };
 		F6A3F9E12A8369F8001A2117 /* ImageListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListRepository.swift; sourceTree = "<group>"; };
 		F6A3F9E32A836A17001A2117 /* ImageListLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListLocalDataSource.swift; sourceTree = "<group>"; };
@@ -60,7 +63,8 @@
 		F6A814472A83A7CB0084F0EB /* ImageCollectionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCellModel.swift; sourceTree = "<group>"; };
 		F6A814492A83B7C30084F0EB /* ImageCollectionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewState.swift; sourceTree = "<group>"; };
 		F6A8144C2A83C9D10084F0EB /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		F6A814502A83E0EC0084F0EB /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		F6A814542A84BE170084F0EB /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
+		F6A814562A84F8B30084F0EB /* ImageDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailModel.swift; sourceTree = "<group>"; };
 		F6C846F42A835FB80057E381 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F6C846F72A835FFA0057E381 /* ImageDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailBuilder.swift; sourceTree = "<group>"; };
 		F6C846F92A8360180057E381 /* ImageDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailInteractor.swift; sourceTree = "<group>"; };
@@ -121,7 +125,7 @@
 		F6A3F9D72A8366D2001A2117 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F6A3F9DD2A8369B1001A2117 /* ImageItem.swift */,
+				F6A3F9DD2A8369B1001A2117 /* ImageMetadata.swift */,
 				F6A3F9DF2A8369CE001A2117 /* ImageMetadataDTO.swift */,
 			);
 			path = Model;
@@ -171,6 +175,15 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		F6A814582A8502C90084F0EB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F6C846FF2A8360530057E381 /* ImageDetailVC.swift */,
+				F6A814562A84F8B30084F0EB /* ImageDetailModel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F6C846F32A835F9E0057E381 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,7 +195,7 @@
 		F6C846F62A835FD90057E381 /* ImageItemCSModule */ = {
 			isa = PBXGroup;
 			children = (
-				F6C846FF2A8360530057E381 /* ImageDetailVC.swift */,
+				F6A814582A8502C90084F0EB /* View */,
 				F6C846FB2A83602A0057E381 /* ImageDetailPresenter.swift */,
 				F6C846F92A8360180057E381 /* ImageDetailInteractor.swift */,
 				F6C846F72A835FFA0057E381 /* ImageDetailBuilder.swift */,
@@ -208,7 +221,6 @@
 			children = (
 				F6C847052A8361430057E381 /* ImageCollectionCell */,
 				F6A3F9CC2A8363E7001A2117 /* ImageCollectionVC.swift */,
-				F6A814502A83E0EC0084F0EB /* CollectionViewController.swift */,
 				F6A814492A83B7C30084F0EB /* ImageCollectionViewState.swift */,
 			);
 			path = View;
@@ -227,6 +239,7 @@
 		F6F08EF42A835BFC009A3696 = {
 			isa = PBXGroup;
 			children = (
+				F60B91012A85397700CC458F /* .swiftlint.yml */,
 				F6F08EFF2A835BFC009A3696 /* SimpleUnsplashClientNew */,
 				F6F08EFE2A835BFC009A3696 /* Products */,
 				9F2D969D62713192A1F38074 /* Pods */,
@@ -249,6 +262,7 @@
 				F6F08F022A835BFC009A3696 /* SceneDelegate.swift */,
 				F6F08F0E2A835BFE009A3696 /* Info.plist */,
 				F6A3F9EE2A836B2D001A2117 /* Storyboards */,
+				F6A814542A84BE170084F0EB /* StartScreen.swift */,
 				F6C846F62A835FD90057E381 /* ImageItemCSModule */,
 				F6C847032A8361190057E381 /* ImageListCSModule */,
 				F6A3F9D62A8366C7001A2117 /* Logic */,
@@ -271,6 +285,7 @@
 				F6F08EFA2A835BFC009A3696 /* Frameworks */,
 				F6F08EFB2A835BFC009A3696 /* Resources */,
 				247E46B990EC4EC012D07FE4 /* [CP] Embed Pods Frameworks */,
+				F6F264852A852FAF0083B630 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -319,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F60B91022A85397700CC458F /* .swiftlint.yml in Resources */,
 				F6F08F0D2A835BFE009A3696 /* LaunchScreen.storyboard in Resources */,
 				F6F08F0A2A835BFE009A3696 /* Assets.xcassets in Resources */,
 				F6F08F082A835BFC009A3696 /* Main.storyboard in Resources */,
@@ -368,6 +384,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F6F264852A852FAF0083B630 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -375,11 +409,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6A814512A83E0EC0084F0EB /* CollectionViewController.swift in Sources */,
 				F6A3F9EA2A836A6A001A2117 /* ImageListRemoteDataSource.swift in Sources */,
-				F6A3F9DE2A8369B1001A2117 /* ImageItem.swift in Sources */,
+				F6A3F9DE2A8369B1001A2117 /* ImageMetadata.swift in Sources */,
 				F6A3F9E82A836A4D001A2117 /* EnvironmentProvider.swift in Sources */,
 				F6A8144D2A83C9D10084F0EB /* Alert.swift in Sources */,
+				F6A814572A84F8B30084F0EB /* ImageDetailModel.swift in Sources */,
+				F6A814552A84BE170084F0EB /* StartScreen.swift in Sources */,
 				F6A3F9D32A83645F001A2117 /* ImageCollectionPresenter.swift in Sources */,
 				F6A8144A2A83B7C30084F0EB /* ImageCollectionViewState.swift in Sources */,
 				F6A814482A83A7CB0084F0EB /* ImageCollectionCellModel.swift in Sources */,

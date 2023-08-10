@@ -33,12 +33,16 @@ extension ImageCollectionPresenter: ImageCollectionPresenterInput {
     func show(imageCollection: [ImageMetadata]) {
         let imagesItems = imageCollection.map { metadata -> ImageCollectionCellModel in
             let cellModel = ImageCollectionCellModel(
-                imageURL: metadata.imageThumb,
-                imageDescription: NSAttributedString(string: "\(metadata.description)",
-                                                     attributes: [NSAttributedString.Key.foregroundColor:UIColor(hex: metadata.color)]),
+                imageID: metadata.id,
+                imageURLThumb: metadata.imageThumb,
+                imageDescription: NSAttributedString(
+                    string: "\(metadata.description)",
+                    attributes: [NSAttributedString.Key.foregroundColor: UIColor(hex: metadata.color)]
+                ),
                 imageLikes: String(metadata.likes)
             )
-            
+            return cellModel
         }
+        view?.configure(state: .content(imagesItems))
     }
 }

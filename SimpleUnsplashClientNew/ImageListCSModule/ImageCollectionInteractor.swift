@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ImageCollectionInteractorInput: AnyObject {
-    func viewDidLoad()
+    func viewDidLoad(currenPage: Int)
     
     func didTapRetryLoading()
     func didTapImage(imgID: String)
@@ -24,17 +24,17 @@ final class ImageCollectionInteractor {
     private let presenter: ImageCollectionPresenterInput
     private let router: ImageCollectionRouter
     
-    private let imageListRepository: ImageListRepositoryProtocol
+    private let imageListRepository: ImagesRepositoryProtocol
     
-    init(presenter: ImageCollectionPresenterInput, router: ImageCollectionRouter, imageListRepository: ImageListRepositoryProtocol) {
+    init(presenter: ImageCollectionPresenterInput, router: ImageCollectionRouter, imageListRepository: ImagesRepositoryProtocol) {
         self.presenter = presenter
         self.router = router
         
         self.imageListRepository = imageListRepository
     }
     
-    private func loadImages() {
-        imageListRepository.getImageItems(currentPage: 1) { [weak self] result in
+    private func loadImages(currentPage: Int) {
+        imageListRepository.getImageItems(currentPage: currentPage) { [weak self] result in
             DispatchQueue.main.async {
                 self?.handleImageItemsResult(result)
             }
@@ -45,14 +45,14 @@ final class ImageCollectionInteractor {
         switch result {
         case .success(let imagesInternalModel):
             presenter.show(imageCollection: imagesInternalModel)
-        
+
         case .failure(let error):
-            var errorType = convertImageListRepositoryErrorToImageCollectionInteractorError(error)
+            let errorType = convertImageListRepositoryErrorToImageCollectionInteractorError(error)
             switch errorType {
-//MARK: СДЕЛАТЬ ОТОБРАЖЕНИЕ ДВУХ РАЗНЫХ ЭКРАНОВ, ОДИН С ВОЗМОЖНОСТЬЮ ОБНОВИТЬ ДАННЫЕ, ДРУГОЙ - БЕЗ
+                // MARK: СДЕЛАТЬ ОТОБРАЖЕНИЕ ДВУХ РАЗНЫХ ЭКРАНОВ, ОДИН С ВОЗМОЖНОСТЬЮ ОБНОВИТЬ ДАННЫЕ, ДРУГОЙ - БЕЗ
             case .retryError:
                 presenter.showLoadingError(error)
-            
+
             case .noRetryError:
                 presenter.showLoadingError(error)
             }
@@ -63,14 +63,14 @@ final class ImageCollectionInteractor {
 
 extension ImageCollectionInteractor: ImageCollectionInteractorInput {
     
-    func viewDidLoad() {
+    func viewDidLoad(currenPage: Int) {
         presenter.showLoading()
-        loadImages()
+        loadImages(currentPage: currenPage)
     }
     
     func didTapRetryLoading() {
         presenter.showLoading()
-        loadImages()
+        //        loadImages()
     }
     
     func didTapImage(imgID: String) {

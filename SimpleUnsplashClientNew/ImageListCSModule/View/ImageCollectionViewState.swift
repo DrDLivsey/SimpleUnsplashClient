@@ -12,5 +12,5 @@ enum ImageCollectionViewState {
     
     case loading
     case loadingError(Error)
-    case content
+    case content([ImageCollectionCellModel])
 }

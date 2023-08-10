@@ -19,17 +19,17 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="dAd-BP-KtW" kind="relationship" relationship="rootViewController" id="AEm-Lt-yGW"/>
+                        <segue destination="bZJ-aK-spd" kind="relationship" relationship="rootViewController" id="j9y-1A-D8u"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnc-BJ-sH2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="14.503816793893129" y="-73.239436619718319"/>
+            <point key="canvasLocation" x="-752" y="-73"/>
         </scene>
         <!--Images List-->
         <scene sceneID="Jfg-kM-fhc">
             <objects>
-                <collectionViewController storyboardIdentifier="ImageCollectionVC" id="dAd-BP-KtW" customClass="ImageCollectionVC" customModule="SimpleUnsplashClient" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="ImageCollectionVC" id="dAd-BP-KtW" customClass="ImageCollectionVC" customModule="SimpleUnsplashClientNew" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="eFQ-r6-75r">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +55,7 @@
         <!--Image DetailVC-->
         <scene sceneID="KNV-97-Ita">
             <objects>
-                <viewController storyboardIdentifier="ImageDetailVC" id="F21-vq-BvF" customClass="ImageDetailVC" customModule="SimpleUnsplashClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageDetailVC" id="F21-vq-BvF" customClass="ImageDetailVC" customModule="SimpleUnsplashClientNew" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CWb-cS-F0k">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,10 +67,55 @@
             </objects>
             <point key="canvasLocation" x="1732" y="-73"/>
         </scene>
+        <!--Start Screen-->
+        <scene sceneID="KoZ-GO-Vfr">
+            <objects>
+                <viewController id="bZJ-aK-spd" customClass="StartScreen" customModule="SimpleUnsplashClientNew" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q84-Ot-5o9">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLs-xa-0Rf">
+                                <rect key="frame" x="156.33333333333334" y="408.66666666666669" width="80.333333333333343" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Начать"/>
+                                <connections>
+                                    <action selector="openImageList" destination="bZJ-aK-spd" eventType="touchUpInside" id="Qb2-dq-bFL"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SimpleUnsplashClient" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5N-K9-vMO">
+                                <rect key="frame" x="35.333333333333343" y="318" width="322.33333333333326" height="40.666666666666686"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <color key="textColor" systemColor="systemBlueColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lbf-hI-yBV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WLs-xa-0Rf" firstAttribute="centerX" secondItem="Q84-Ot-5o9" secondAttribute="centerX" id="5zo-2j-Rsx"/>
+                            <constraint firstItem="d5N-K9-vMO" firstAttribute="centerX" secondItem="WLs-xa-0Rf" secondAttribute="centerX" id="SO7-I3-B3S"/>
+                            <constraint firstItem="WLs-xa-0Rf" firstAttribute="top" secondItem="d5N-K9-vMO" secondAttribute="bottom" constant="50" id="wWM-29-LLs"/>
+                            <constraint firstItem="WLs-xa-0Rf" firstAttribute="centerY" secondItem="Q84-Ot-5o9" secondAttribute="centerY" id="y3g-Wf-6Vc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ycJ-k0-dob"/>
+                    <connections>
+                        <outlet property="button" destination="WLs-xa-0Rf" id="TyZ-V9-Wtt"/>
+                        <outlet property="screenTitle" destination="d5N-K9-vMO" id="Zxm-ka-mxa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ou-Ec-FUT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="123" y="-73"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -8,17 +8,11 @@
 import UIKit
 
 final class Alert: UIAlertController {
-    
     func configureForNoRetryError(_ error: Error) -> UIAlertController {
         return UIAlertController(
             title: "Возникла ошибка",
             message: "При работе возникла серьезная ошибка - \(error)",
             preferredStyle: .alert
-        )
-        
-        self.addAction(UIAlertAction(
-            title: "Понятно",
-            style: .cancel)
         )
     }
     
@@ -27,17 +21,6 @@ final class Alert: UIAlertController {
             title: "Возникла ошибка",
             message: "При работе возника ошибка - \(error). Попробовать еще раз?",
             preferredStyle: .alert
-        )
-        
-        self.addAction(UIAlertAction(
-            title: "Да",
-            style: .default,
-            handler: {return}
-        )
-        
-        self.addAction(UIAlertAction(
-            title: "Нет",
-            style: .cancel)
         )
     }
 }
