@@ -72,9 +72,6 @@ final class ImageListRepository: ImagesRepositoryProtocol {
     }
     
     func getImageItem(imgID: String, completion: @escaping(Result<ImageMetadata, ImageListRepository.ImageListRepositoryError>) -> Void) {
-        print("getImageItem \(imgID)")
-        print("getImageItem \(_imagesInternalModel)")
-        print("getImageItem \(imagesInternalModel)")
         if let imageItem = _imagesInternalModel.first(where: { $0.id == imgID }) {
             completion(.success(imageItem))
         } else {

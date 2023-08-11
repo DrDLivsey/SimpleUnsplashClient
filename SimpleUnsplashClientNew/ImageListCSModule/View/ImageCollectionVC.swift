@@ -38,7 +38,7 @@ final class ImageCollectionVC: UICollectionViewController {
         collectionView.register(cellTypeNib, forCellWithReuseIdentifier: "ImageCollectionCell")
         collectionView.dataSource = self
         
-        interactor.viewDidLoad(currenPage: currentPage)
+        interactor.viewDidLoad(currentPage: currentPage)
         self.setupLayout()
     }
     
@@ -63,7 +63,7 @@ final class ImageCollectionVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.item == dataToDisplay.count - 2 {
-            interactor.viewDidLoad(currenPage: currentPage)
+            interactor.viewDidLoad(currentPage: currentPage)
         }
     }
     

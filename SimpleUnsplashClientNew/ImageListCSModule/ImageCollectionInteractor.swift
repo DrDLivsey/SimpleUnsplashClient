@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ImageCollectionInteractorInput: AnyObject {
-    func viewDidLoad(currenPage: Int)
+    func viewDidLoad(currentPage: Int)
     
     func didTapRetryLoading()
     func didTapImage(imgID: String)
@@ -63,9 +63,9 @@ final class ImageCollectionInteractor {
 
 extension ImageCollectionInteractor: ImageCollectionInteractorInput {
     
-    func viewDidLoad(currenPage: Int) {
+    func viewDidLoad(currentPage: Int) {
         presenter.showLoading()
-        loadImages(currentPage: currenPage)
+        loadImages(currentPage: currentPage)
     }
     
     func didTapRetryLoading() {

@@ -30,9 +30,15 @@ final class ImageDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         
         interactor.viewDidLoad()
     }
+
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        interactor.viewDidLoad()
+//    }
 }
 
 extension ImageDetailVC: ImageDetailVCInput {
