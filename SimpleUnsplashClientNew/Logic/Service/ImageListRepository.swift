@@ -42,7 +42,6 @@ final class ImageListRepository: ImagesRepositoryProtocol {
         if let cachedData = imageListLocalDataSource.getImageItems(currentPage: currentPage) {
             accessQueue.async(flags: .barrier) { [weak self] in
                 guard let self = self else {return}
-                print("Loaded from cache data was added to the _imagesInternalModel")
                 self._imagesInternalModel.append(contentsOf: cachedData)
                 completion(.success(imagesInternalModel))
             }
@@ -57,7 +56,6 @@ final class ImageListRepository: ImagesRepositoryProtocol {
                     imageListLocalDataSource.setImageItems(currentPage: currentPage, imageItems: internalModelPack)
                     accessQueue.async(flags: .barrier) { [weak self] in
                         guard let self = self else {return}
-                        print("Loaded from API data was added to the _imagesInternalModel")
                         self._imagesInternalModel.append(contentsOf: internalModelPack)
                         completion(.success(_imagesInternalModel))
                     }

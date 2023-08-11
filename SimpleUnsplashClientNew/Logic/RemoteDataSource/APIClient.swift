@@ -46,24 +46,20 @@ final class APIClient: APIClientProtocol {
         parameters["client_id"] = enviromentProvider.getAPIKeyValue()
         
         guard let url = createURL(path: path, parameters: parameters) else {
-            print("URL created for URLSession is broken")
             completion(.failure(APIClientError.wrongURL))
             return
         }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
-                print("No data after URLSession has worked")
                 completion(.failure(APIClientError.requestError))
                 return
             }
             
             do {
                 let result = try self.decoder.decode(DTO.self, from: data)
-                print("Model(s) was created. This is the result: \(result)")
                 completion(.success(result))
             } catch let error {
-                print("Something went wrong during decoding process JSON-DTO")
                 completion(.failure(APIClientError.decodingError(error)))
             }
         }

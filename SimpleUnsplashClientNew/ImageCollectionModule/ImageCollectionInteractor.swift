@@ -49,7 +49,6 @@ final class ImageCollectionInteractor {
         case .failure(let error):
             let errorType = convertImageListRepositoryErrorToImageCollectionInteractorError(error)
             switch errorType {
-                // MARK: СДЕЛАТЬ ОТОБРАЖЕНИЕ ДВУХ РАЗНЫХ ЭКРАНОВ, ОДИН С ВОЗМОЖНОСТЬЮ ОБНОВИТЬ ДАННЫЕ, ДРУГОЙ - БЕЗ
             case .retryError:
                 presenter.showLoadingError(error)
 
