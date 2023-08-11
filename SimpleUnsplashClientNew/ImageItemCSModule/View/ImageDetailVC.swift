@@ -32,7 +32,6 @@ final class ImageDetailVC: UIViewController {
         super.viewDidLoad()
         
         interactor.viewDidLoad()
-        
     }
 }
 
@@ -41,11 +40,14 @@ extension ImageDetailVC: ImageDetailVCInput {
     func configure(imageModel: ImageDetailModel) {
         let imageContainer = UIImageView()
         imageContainer.kf.setImage(with: imageModel.imageURLRegular)
-        imageContainer.contentMode = .scaleAspectFill
+        imageContainer.contentMode = .scaleAspectFit
         
         view.addSubview(imageContainer)
         imageContainer.translatesAutoresizingMaskIntoConstraints = false
-        imageContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        imageContainer.topAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.topAnchor,
+            constant: 0
+        ).isActive = true
         imageContainer.bottomAnchor.constraint(
             equalTo: view.safeAreaLayoutGuide.bottomAnchor,
             constant: 0

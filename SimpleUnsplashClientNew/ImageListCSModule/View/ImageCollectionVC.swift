@@ -47,10 +47,6 @@ final class ImageCollectionVC: UICollectionViewController {
         return dataToDisplay.count
     }
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "ImageCollectionCell",
@@ -64,6 +60,12 @@ final class ImageCollectionVC: UICollectionViewController {
         checkedCell.configure(model: dataToDisplay[indexPath.row])
         return checkedCell
     }
+
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.item == dataToDisplay.count - 2 {
+            interactor.viewDidLoad(currenPage: currentPage)
+        }
+    }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         interactor.didTapImage(imgID: dataToDisplay[indexPath.row].imageID)
@@ -74,9 +76,10 @@ extension ImageCollectionVC: ImageCollectionVCInput {
     func configure(state: ImageCollectionViewState) {
         switch state {
         case .loading:
+            view.addSubview(spinner)
             spinner.configureForLoadingScreen()
             spinner.startAnimating()
-            view.addSubview(spinner)
+
             
         case .loadingError(let error):
             self.present(alert.configureForRetryError(error), animated: true)
