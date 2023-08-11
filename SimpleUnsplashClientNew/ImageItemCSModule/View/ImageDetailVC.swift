@@ -40,7 +40,7 @@ extension ImageDetailVC: ImageDetailVCInput {
     
     func configure(imageModel: ImageDetailModel) {
         let imageContainer = UIImageView()
-        imageContainer.kf.setImage(with: imageModel.imageURLThumb)
+        imageContainer.kf.setImage(with: imageModel.imageURLRegular)
         imageContainer.contentMode = .scaleAspectFill
         
         view.addSubview(imageContainer)

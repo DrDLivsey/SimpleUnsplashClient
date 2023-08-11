@@ -16,10 +16,8 @@ final class ImageDetailBuilder: ImageDetailBuilderProtocol {
     func make(imgID: String) -> UIViewController {
         
         let presenter = ImageDetailPresenter()
-        let router = ImageDetailRouter()
         let interactor = ImageDetailInteractor(
             presenter: presenter,
-            router: router,
             imageListRepository: ImageListRepository.sharedInstance,
             imgID: imgID
         )
@@ -28,7 +26,6 @@ final class ImageDetailBuilder: ImageDetailBuilderProtocol {
         let imageDetailVC = ImageDetailVC(interactor: interactor)
         
         presenter.view = imageDetailVC
-        router.view = imageDetailVC
         
         return imageDetailVC
     }

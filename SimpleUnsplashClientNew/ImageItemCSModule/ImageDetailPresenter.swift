@@ -21,7 +21,7 @@ extension ImageDetailPresenter: ImageDetailPresenterInput {
     
     func showImage(image: ImageMetadata) {
         let imageModel = ImageDetailModel(
-            imageURLThumb: image.imageThumb,
+            imageURLRegular: image.imageRegular,
             imageUser: image.user
         )
         view?.configure(imageModel: imageModel)

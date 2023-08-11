@@ -31,7 +31,6 @@
 		F6C846F82A835FFA0057E381 /* ImageDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846F72A835FFA0057E381 /* ImageDetailBuilder.swift */; };
 		F6C846FA2A8360180057E381 /* ImageDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846F92A8360180057E381 /* ImageDetailInteractor.swift */; };
 		F6C846FC2A83602A0057E381 /* ImageDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846FB2A83602A0057E381 /* ImageDetailPresenter.swift */; };
-		F6C846FE2A83603E0057E381 /* ImageDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846FD2A83603E0057E381 /* ImageDetailRouter.swift */; };
 		F6C847002A8360530057E381 /* ImageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C846FF2A8360530057E381 /* ImageDetailVC.swift */; };
 		F6C8470A2A83626B0057E381 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C847082A83626A0057E381 /* ImageCollectionCell.swift */; };
 		F6C8470B2A83626B0057E381 /* ImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6C847092A83626B0057E381 /* ImageCollectionCell.xib */; };
@@ -69,7 +68,6 @@
 		F6C846F72A835FFA0057E381 /* ImageDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailBuilder.swift; sourceTree = "<group>"; };
 		F6C846F92A8360180057E381 /* ImageDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailInteractor.swift; sourceTree = "<group>"; };
 		F6C846FB2A83602A0057E381 /* ImageDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailPresenter.swift; sourceTree = "<group>"; };
-		F6C846FD2A83603E0057E381 /* ImageDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailRouter.swift; sourceTree = "<group>"; };
 		F6C846FF2A8360530057E381 /* ImageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailVC.swift; sourceTree = "<group>"; };
 		F6C847082A83626A0057E381 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
 		F6C847092A83626B0057E381 /* ImageCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionCell.xib; sourceTree = "<group>"; };
@@ -199,7 +197,6 @@
 				F6C846FB2A83602A0057E381 /* ImageDetailPresenter.swift */,
 				F6C846F92A8360180057E381 /* ImageDetailInteractor.swift */,
 				F6C846F72A835FFA0057E381 /* ImageDetailBuilder.swift */,
-				F6C846FD2A83603E0057E381 /* ImageDetailRouter.swift */,
 			);
 			path = ImageItemCSModule;
 			sourceTree = "<group>";
@@ -422,7 +419,6 @@
 				F6C846FC2A83602A0057E381 /* ImageDetailPresenter.swift in Sources */,
 				F6C8470A2A83626B0057E381 /* ImageCollectionCell.swift in Sources */,
 				F6A3F9E62A836A33001A2117 /* APIClient.swift in Sources */,
-				F6C846FE2A83603E0057E381 /* ImageDetailRouter.swift in Sources */,
 				F6A3F9E22A8369F8001A2117 /* ImageListRepository.swift in Sources */,
 				F6F08F012A835BFC009A3696 /* AppDelegate.swift in Sources */,
 				F6C846F82A835FFA0057E381 /* ImageDetailBuilder.swift in Sources */,

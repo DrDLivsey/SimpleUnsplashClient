@@ -8,7 +8,7 @@
 import Foundation
 
 struct ImageDetailModel {
-    let imageURLThumb: URL?
+    let imageURLRegular: URL?
     let imageUser: String
     
 }

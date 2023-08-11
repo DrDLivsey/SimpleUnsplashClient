@@ -14,21 +14,18 @@ protocol ImageDetailInteractorInput: AnyObject {
 final class ImageDetailInteractor {
     
     private let presenter: ImageDetailPresenterInput
-    private let router: ImageDetailRouterInput
-    
+
     private let imageListRepository: ImagesRepositoryProtocol
     
     private let imgID: String
     
     init(
         presenter: ImageDetailPresenterInput,
-        router: ImageDetailRouterInput,
         imageListRepository: ImagesRepositoryProtocol,
         imgID: String
     ) {
         self.presenter = presenter
         self.imageListRepository = imageListRepository
-        self.router = router
         self.imgID = imgID
     }
     
