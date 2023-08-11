@@ -21,7 +21,7 @@ final class ImageCollectionBuilder: ImageCollectionBuilderProtocol {
             imagesRepository: ImagesRepository.sharedInstance
         )
         
-        let imageCollectionVC = ImageCollectionVC(intercator: interactor)
+        let imageCollectionVC = ImageCollectionVC(interactor: interactor)
 
         presenter.view = imageCollectionVC
         router.view = imageCollectionVC

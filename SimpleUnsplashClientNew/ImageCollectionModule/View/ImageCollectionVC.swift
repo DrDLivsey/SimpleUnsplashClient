@@ -20,10 +20,10 @@ final class ImageCollectionVC: UICollectionViewController {
     
     private var dataToDisplay: [ImageCollectionCellModel] = []
     private var currentPage = 1
-    private var cellName = "ImageCollectionCell"
+    private let cellName = "ImageCollectionCell"
     
-    init(intercator: ImageCollectionInteractorInput) {
-        self.interactor = intercator
+    init(interactor: ImageCollectionInteractorInput) {
+        self.interactor = interactor
         
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }

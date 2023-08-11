@@ -10,9 +10,9 @@ import Kingfisher
 
 final class ImageCollectionCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageThumb: UIImageView?
-    @IBOutlet weak var imageDescription: UILabel?
-    @IBOutlet weak var imageLikes: UILabel?
+    @IBOutlet private weak var imageThumb: UIImageView?
+    @IBOutlet private weak var imageDescription: UILabel?
+    @IBOutlet private weak var imageLikes: UILabel?
     
     func configure(model: ImageCollectionCellModel) {
         imageThumb?.kf.setImage(with: model.imageURLThumb)

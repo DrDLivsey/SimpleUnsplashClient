@@ -79,20 +79,3 @@ extension ImageCollectionInteractor: ImageCollectionInteractorInput {
         router.openImage(imgID: imgID, userName: userName)
     }
 }
-
-extension ImageCollectionInteractor {
-    private func convertImagesRepositoryErrorToImageCollectionInteractorError(
-        _ input: ImagesRepository.ImagesRepositoryError
-    ) -> ImageCollectionInteractor.ImageCollectionInteractorError {
-        
-        var output: ImageCollectionInteractor.ImageCollectionInteractorError
-        
-        switch input {
-        case .internalError:
-            output = .retryError
-        case .requestError:
-            output = .noRetryError
-        }
-        return output
-    }
-}

@@ -21,7 +21,7 @@ protocol ImagesRepositoryProtocol {
 
 final class ImagesRepository: ImagesRepositoryProtocol {
     
-    static var sharedInstance = ImagesRepository()
+    static let sharedInstance = ImagesRepository()
     
     enum ImagesRepositoryError: Error {
         case internalError
@@ -33,9 +33,6 @@ final class ImagesRepository: ImagesRepositoryProtocol {
             accessQueue.sync { _imagesInternalModel }
         }
         set {
-            // Если очередь serial:
-            // accessQueue.async { [weak self] in self?._imagesInternalModel = newValue }
-            // Если очередь concurrent:
             accessQueue.async(flags: .barrier) { [weak self] in self?._imagesInternalModel = newValue }
         }
     }
@@ -77,7 +74,7 @@ final class ImagesRepository: ImagesRepositoryProtocol {
         if let imageItem = imagesInternalModel.first(where: { $0.id == imgID }) {
             completion(.success(imageItem))
         } else {
-            completion(.failure(ImagesRepositoryError.internalError))
+            completion(.failure(.internalError))
         }
     }
 }
@@ -103,9 +100,9 @@ private extension ImageListRemoteDataSource.ImageListRemoteDataSourceError {
     var imagesRepositoryError: ImagesRepository.ImagesRepositoryError {
         switch self {
         case .internalError:
-            return ImagesRepository.ImagesRepositoryError.internalError
+            return .internalError
         case .networkError:
-            return ImagesRepository.ImagesRepositoryError.requestError
+            return .requestError
         }
     }
 }
