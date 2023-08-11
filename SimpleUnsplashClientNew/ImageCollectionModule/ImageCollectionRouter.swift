@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ImageCollectionRouterInput: AnyObject {
-    func openImage(imgID: String)
+    func openImage(imgID: String, userName: String)
 }
 
 final class ImageCollectionRouter {
@@ -16,8 +16,9 @@ final class ImageCollectionRouter {
 }
 
 extension ImageCollectionRouter: ImageCollectionRouterInput {
-    func openImage(imgID: String) {
+    func openImage(imgID: String, userName: String) {
         let imageDetailVC = ImageDetailBuilder().make(imgID: imgID)
         view?.navigationController?.pushViewController(imageDetailVC, animated: true)
+        imageDetailVC.navigationItem.title = userName
     }
 }

@@ -11,7 +11,7 @@ protocol ImageCollectionInteractorInput: AnyObject {
     func viewDidLoad(currentPage: Int)
     
     func didTapRetryLoading()
-    func didTapImage(imgID: String)
+    func didTapImage(imgID: String, userName: String)
 }
 
 final class ImageCollectionInteractor {
@@ -24,41 +24,45 @@ final class ImageCollectionInteractor {
     private let presenter: ImageCollectionPresenterInput
     private let router: ImageCollectionRouter
     
-    private let imageListRepository: ImagesRepositoryProtocol
+    private let imagesRepository: ImagesRepositoryProtocol
     
-    init(presenter: ImageCollectionPresenterInput, router: ImageCollectionRouter, imageListRepository: ImagesRepositoryProtocol) {
+    init(
+        presenter: ImageCollectionPresenterInput,
+        router: ImageCollectionRouter,
+        imagesRepository: ImagesRepositoryProtocol
+    ) {
         self.presenter = presenter
         self.router = router
         
-        self.imageListRepository = imageListRepository
+        self.imagesRepository = imagesRepository
     }
     
     private func loadImages(currentPage: Int) {
-        imageListRepository.getImageItems(currentPage: currentPage) { [weak self] result in
+        imagesRepository.getImageItems(currentPage: currentPage) { [weak self] result in
             DispatchQueue.main.async {
                 self?.handleImageItemsResult(result)
             }
         }
     }
     
-    private func handleImageItemsResult(_ result: Result<[ImageMetadata], ImageListRepository.ImageListRepositoryError>) {
+    private func handleImageItemsResult(_ result: Result<[ImageMetadata], ImagesRepository.ImagesRepositoryError>) {
         switch result {
         case .success(let imagesInternalModel):
             presenter.show(imageCollection: imagesInternalModel)
 
-        case .failure(let error):
-            let errorType = convertImageListRepositoryErrorToImageCollectionInteractorError(error)
-            switch errorType {
-            case .retryError:
-                presenter.showLoadingError(error)
-
-            case .noRetryError:
-                presenter.showLoadingError(error)
-            }
+        case .failure(_):
+            return
+            // TODO: implement error
+            // let errorType = convertImagesRepositoryErrorToImageCollectionInteractorError(error)
+            // switch errorType {
+            // case .retryError:
+            // presenter.showLoadingError(error)
+            // case .noRetryError:
+            // presenter.showLoadingError(error)
+            // }
         }
     }
 }
-
 
 extension ImageCollectionInteractor: ImageCollectionInteractorInput {
     
@@ -69,24 +73,25 @@ extension ImageCollectionInteractor: ImageCollectionInteractorInput {
     
     func didTapRetryLoading() {
         presenter.showLoading()
-        //        loadImages()
     }
     
-    func didTapImage(imgID: String) {
-        router.openImage(imgID: imgID)
+    func didTapImage(imgID: String, userName: String) {
+        router.openImage(imgID: imgID, userName: userName)
     }
 }
 
 extension ImageCollectionInteractor {
-    private func convertImageListRepositoryErrorToImageCollectionInteractorError(_ input: ImageListRepository.ImageListRepositoryError) -> ImageCollectionInteractor.ImageCollectionInteractorError {
+    private func convertImagesRepositoryErrorToImageCollectionInteractorError(
+        _ input: ImagesRepository.ImagesRepositoryError
+    ) -> ImageCollectionInteractor.ImageCollectionInteractorError {
         
         var output: ImageCollectionInteractor.ImageCollectionInteractorError
         
         switch input {
         case .internalError:
-            output = ImageCollectionInteractorError.retryError
+            output = .retryError
         case .requestError:
-            output = ImageCollectionInteractorError.noRetryError
+            output = .noRetryError
         }
         return output
     }

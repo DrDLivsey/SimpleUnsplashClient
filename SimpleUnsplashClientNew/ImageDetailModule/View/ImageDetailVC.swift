@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-protocol ImageDetailVCInput: AnyObject {
+protocol ImageDetailViewInput: AnyObject {
     
     func configure(imageModel: ImageDetailModel)
     
@@ -34,14 +34,9 @@ final class ImageDetailVC: UIViewController {
         
         interactor.viewDidLoad()
     }
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        interactor.viewDidLoad()
-//    }
 }
 
-extension ImageDetailVC: ImageDetailVCInput {
+extension ImageDetailVC: ImageDetailViewInput {
     
     func configure(imageModel: ImageDetailModel) {
         let imageContainer = UIImageView()

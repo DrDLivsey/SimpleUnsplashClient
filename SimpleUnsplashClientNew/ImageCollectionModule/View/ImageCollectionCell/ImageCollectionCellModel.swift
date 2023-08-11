@@ -7,11 +7,11 @@
 
 import Foundation
 
-
 struct ImageCollectionCellModel {
     let imageID: String
     let imageURLThumb: URL?
     let imageDescription: NSAttributedString
     let imageLikes: String
+    let imageUser: String
     
 }

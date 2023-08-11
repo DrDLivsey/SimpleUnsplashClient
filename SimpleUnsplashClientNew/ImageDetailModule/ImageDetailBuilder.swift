@@ -18,10 +18,9 @@ final class ImageDetailBuilder: ImageDetailBuilderProtocol {
         let presenter = ImageDetailPresenter()
         let interactor = ImageDetailInteractor(
             presenter: presenter,
-            imageListRepository: ImageListRepository.sharedInstance,
+            imagesRepository: ImagesRepository.sharedInstance,
             imgID: imgID
         )
-        
         
         let imageDetailVC = ImageDetailVC(interactor: interactor)
         

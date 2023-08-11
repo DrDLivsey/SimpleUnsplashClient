@@ -9,8 +9,8 @@ import Foundation
 
 enum ImageCollectionViewState {
     
-    
     case loading
-    case loadingError(Error)
+    // TODO: implement error view
+    // case loadingError(Error)
     case content([ImageCollectionCellModel])
 }

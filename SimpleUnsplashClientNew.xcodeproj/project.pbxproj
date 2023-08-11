@@ -16,7 +16,7 @@
 		F6A3F9D52A836478001A2117 /* ImageCollectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9D42A836478001A2117 /* ImageCollectionRouter.swift */; };
 		F6A3F9DE2A8369B1001A2117 /* ImageMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9DD2A8369B1001A2117 /* ImageMetadata.swift */; };
 		F6A3F9E02A8369CE001A2117 /* ImageMetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9DF2A8369CE001A2117 /* ImageMetadataDTO.swift */; };
-		F6A3F9E22A8369F8001A2117 /* ImageListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9E12A8369F8001A2117 /* ImageListRepository.swift */; };
+		F6A3F9E22A8369F8001A2117 /* ImagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9E12A8369F8001A2117 /* ImagesRepository.swift */; };
 		F6A3F9E42A836A17001A2117 /* ImageListLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9E32A836A17001A2117 /* ImageListLocalDataSource.swift */; };
 		F6A3F9E62A836A33001A2117 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9E52A836A33001A2117 /* APIClient.swift */; };
 		F6A3F9E82A836A4D001A2117 /* EnvironmentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A3F9E72A836A4D001A2117 /* EnvironmentProvider.swift */; };
@@ -53,7 +53,7 @@
 		F6A3F9D42A836478001A2117 /* ImageCollectionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionRouter.swift; sourceTree = "<group>"; };
 		F6A3F9DD2A8369B1001A2117 /* ImageMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMetadata.swift; sourceTree = "<group>"; };
 		F6A3F9DF2A8369CE001A2117 /* ImageMetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMetadataDTO.swift; sourceTree = "<group>"; };
-		F6A3F9E12A8369F8001A2117 /* ImageListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListRepository.swift; sourceTree = "<group>"; };
+		F6A3F9E12A8369F8001A2117 /* ImagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesRepository.swift; sourceTree = "<group>"; };
 		F6A3F9E32A836A17001A2117 /* ImageListLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListLocalDataSource.swift; sourceTree = "<group>"; };
 		F6A3F9E52A836A33001A2117 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		F6A3F9E72A836A4D001A2117 /* EnvironmentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentProvider.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		F6A3F9D82A8366D8001A2117 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				F6A3F9E12A8369F8001A2117 /* ImageListRepository.swift */,
+				F6A3F9E12A8369F8001A2117 /* ImagesRepository.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -419,7 +419,7 @@
 				F6C846FC2A83602A0057E381 /* ImageDetailPresenter.swift in Sources */,
 				F6C8470A2A83626B0057E381 /* ImageCollectionCell.swift in Sources */,
 				F6A3F9E62A836A33001A2117 /* APIClient.swift in Sources */,
-				F6A3F9E22A8369F8001A2117 /* ImageListRepository.swift in Sources */,
+				F6A3F9E22A8369F8001A2117 /* ImagesRepository.swift in Sources */,
 				F6F08F012A835BFC009A3696 /* AppDelegate.swift in Sources */,
 				F6C846F82A835FFA0057E381 /* ImageDetailBuilder.swift in Sources */,
 				F6A3F9E02A8369CE001A2117 /* ImageMetadataDTO.swift in Sources */,

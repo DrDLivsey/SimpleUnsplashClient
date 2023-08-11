@@ -91,7 +91,7 @@ indentation_width:
 
 line_length:
   ignores_urls: true
-  ignores_function_declarations: true
+  ignores_function_declarations: false
   ignores_comments: true
 
 multiline_arguments:
@@ -106,4 +106,4 @@ private_over_fileprivate:
 #  ignores_comments: true
 
 vertical_whitespace:
-  max_empty_lines: 2
+  max_empty_lines: 1

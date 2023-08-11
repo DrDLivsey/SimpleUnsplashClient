@@ -16,7 +16,6 @@ protocol APIClientProtocol {
     )
 }
 
-
 final class APIClient: APIClientProtocol {
     enum APIClientError: Error {
         case wrongURL

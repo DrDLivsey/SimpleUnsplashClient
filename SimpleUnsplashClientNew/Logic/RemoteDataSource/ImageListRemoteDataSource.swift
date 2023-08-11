@@ -57,10 +57,11 @@ final class ImageListRemoteDataSource: ImageListRemoteDataSourceProtocol {
     }
 }
 
-
 private extension ImageListRemoteDataSource {
     
-    private func convertAPIClientToDataSourceError(input: APIClient.APIClientError) -> ImageListRemoteDataSource.ImageListRemoteDataSourceError {
+    private func convertAPIClientToDataSourceError(
+        input: APIClient.APIClientError
+    ) -> ImageListRemoteDataSource.ImageListRemoteDataSourceError {
         var output: ImageListRemoteDataSource.ImageListRemoteDataSourceError
         switch input {
         case .wrongURL:

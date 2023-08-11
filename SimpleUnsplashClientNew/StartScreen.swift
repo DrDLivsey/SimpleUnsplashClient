@@ -9,13 +9,13 @@ import UIKit
 
 final class StartScreen: UIViewController {
     
-    @IBOutlet weak var screenTitle: UILabel?
-    @IBOutlet weak var button: UIButton?
+    @IBOutlet private weak var screenTitle: UILabel?
+    @IBOutlet private weak var button: UIButton?
     
-    private var imageCollectionBuilder: ImageCollectionBuilderProtocol = ImageCollectionBuilder()
-    
-    @IBAction func openImageList() {
+    @IBAction private func openImageList() {
+        let imageCollectionBuilder: ImageCollectionBuilderProtocol = ImageCollectionBuilder()
         let imageList = imageCollectionBuilder.make()
+
         self.navigationController?.pushViewController(imageList, animated: true)
     }
     

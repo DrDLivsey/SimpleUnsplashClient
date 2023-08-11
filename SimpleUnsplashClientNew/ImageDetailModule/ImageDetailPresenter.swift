@@ -13,7 +13,7 @@ protocol ImageDetailPresenterInput: AnyObject {
 
 final class ImageDetailPresenter {
     
-    weak var view: ImageDetailVCInput?
+    weak var view: ImageDetailViewInput?
     
 }
 

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol EnvironmentProviderProtocol {
     func getAPIKeyValue() -> String?
 }

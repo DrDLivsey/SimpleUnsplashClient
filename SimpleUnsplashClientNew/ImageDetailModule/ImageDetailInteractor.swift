@@ -15,29 +15,29 @@ final class ImageDetailInteractor {
     
     private let presenter: ImageDetailPresenterInput
 
-    private let imageListRepository: ImagesRepositoryProtocol
+    private let imagesRepository: ImagesRepositoryProtocol
     
     private let imgID: String
     
     init(
         presenter: ImageDetailPresenterInput,
-        imageListRepository: ImagesRepositoryProtocol,
+        imagesRepository: ImagesRepositoryProtocol,
         imgID: String
     ) {
         self.presenter = presenter
-        self.imageListRepository = imageListRepository
+        self.imagesRepository = imagesRepository
         self.imgID = imgID
     }
     
     private func loadImage() {
-        imageListRepository.getImageItem(imgID: imgID) { [weak self] result in
+        imagesRepository.getImageItem(imgID: imgID) { [weak self] result in
             DispatchQueue.main.async {
                 self?.handleImageResult(result)
             }
         }
     }
     
-    private func handleImageResult(_ result: Result<ImageMetadata, ImageListRepository.ImageListRepositoryError>) {
+    private func handleImageResult(_ result: Result<ImageMetadata, ImagesRepository.ImagesRepositoryError>) {
         guard case let .success(image) = result else {
             return
         }
