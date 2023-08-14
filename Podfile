@@ -7,4 +7,6 @@ target 'SimpleUnsplashClientNew' do
 
   # Pods for SimpleUnsplashClientNew
   pod 'Kingfisher', '~> 7.0'
+  pod 'SwiftLint'
+
 end

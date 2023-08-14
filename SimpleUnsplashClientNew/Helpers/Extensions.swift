@@ -7,12 +7,12 @@
 
 import UIKit
 
-//создание UIColor из HEX-строки с длиной 6 символов.
-//если не получилось, отдается черный цвет
+// создание UIColor из HEX-строки с длиной 6 символов.
+// если не получилось, отдается черный цвет
 
 extension UIColor {
     public convenience init(hex: String) {
-        let r, g, b, a: CGFloat
+        let red, green, blue, alpha: CGFloat
         
         if hex.hasPrefix("#") {
             let start = hex.index(hex.startIndex, offsetBy: 1)
@@ -24,12 +24,12 @@ extension UIColor {
                 
                 if scanner.scanHexInt64(&hexNumber) {
                     
-                    r = CGFloat((hexNumber & 0xff0000) >> 16) / 255
-                    g = CGFloat((hexNumber & 0x00ff00) >> 8) / 255
-                    b = CGFloat(hexNumber & 0x0000ff) / 255
-                    a = 1
+                    red = CGFloat((hexNumber & 0xff0000) >> 16) / 255
+                    green = CGFloat((hexNumber & 0x00ff00) >> 8) / 255
+                    blue = CGFloat(hexNumber & 0x0000ff) / 255
+                    alpha = 1
                     
-                    self.init(red: r, green: g, blue: b, alpha: a)
+                    self.init(red: red, green: green, blue: blue, alpha: alpha)
                     return
                 }
             }
