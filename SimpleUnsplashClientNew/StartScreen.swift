@@ -18,9 +18,4 @@ final class StartScreen: UIViewController {
 
         self.navigationController?.pushViewController(imageList, animated: true)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
 }

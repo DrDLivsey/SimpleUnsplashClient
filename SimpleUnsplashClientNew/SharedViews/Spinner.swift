@@ -21,11 +21,21 @@ final class Spinner: UIView {
     func stopAnimating() {
         spinner.stopAnimating()
     }
-    
-    func configureForLoadingScreen() {
+
+    init() {
+        super.init(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: view.frame.size.width,
+            height: view.frame.size.height
+        ))
         configureLabel()
         configureStack()
         configureView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     func configureLabel() {

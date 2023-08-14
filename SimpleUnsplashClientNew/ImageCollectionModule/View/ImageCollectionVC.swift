@@ -13,10 +13,9 @@ protocol ImageCollectionViewInput: AnyObject {
 
 final class ImageCollectionVC: UICollectionViewController {
     
-    var spinner = Spinner()
+    private let spinner = Spinner()
     
-    private var interactor: ImageCollectionInteractorInput
-    private var builder: ImageCollectionBuilderProtocol = ImageCollectionBuilder()
+    private let interactor: ImageCollectionInteractorInput
     
     private var dataToDisplay: [ImageCollectionCellModel] = []
     private var currentPage = 1
@@ -89,7 +88,6 @@ extension ImageCollectionVC: ImageCollectionViewInput {
         switch state {
         case .loading:
             view.addSubview(spinner)
-            spinner.configureForLoadingScreen()
             spinner.startAnimating()
 
         // TODO: implement error view
